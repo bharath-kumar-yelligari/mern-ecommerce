@@ -10,7 +10,6 @@ router.get('/', async (req, res) => {
     try {
         const cart = await Cart.find();
         console.log("cart find", cart)
-
         res.json(cart);
     } catch (err) {
         res.status(500).send(err);
