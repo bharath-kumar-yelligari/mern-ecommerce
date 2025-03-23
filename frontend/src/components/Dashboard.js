@@ -7,6 +7,8 @@ import { FaStar } from "react-icons/fa"; // Star icons
 import "../styles/Dashboard.scss";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
+import Breadcrumbs from "../utils/BreadCrumbs";
+import { FormatCurrency } from "../utils/FormatCurrency";
 
 const Dashboard = () => {
     const dispatch = useDispatch();
@@ -24,10 +26,6 @@ const Dashboard = () => {
         dispatch(fetchProductsRequest(sortOptions.sort, sortOptions.order)); // Fetch products when dashboard loads
     }, [dispatch, sortOption]);
 
-    const formatIndianCurrency = (amount) => {
-        return new Intl.NumberFormat("en-IN").format(amount);
-    };
-
     const handleSortChange = (e) => {
         const value = e.target.value;
         setSortOption(value)
@@ -35,6 +33,7 @@ const Dashboard = () => {
 
     return (
         <div className="main-dashboard-container">
+            <Breadcrumbs />
             <div className="dashboard-container">
                 <div className="products-header-div">
                     <h2>Products</h2>
@@ -58,7 +57,7 @@ const Dashboard = () => {
                                 <div className="rating-div" style={{ backgroundColor: (product.rating < 4) ? "orange" : "green" }}><p>{product.rating}</p><FaStar /></div>
                                 <p className="product-brand">{product.brand}</p>
                                 <div className="price-cart">
-                                    <p> ₹{formatIndianCurrency(product.price)}</p>
+                                    <p> ₹{FormatCurrency(product.price, "en-IN")}</p>
                                     <button className="add-cart-btn" onClick={() => addToCart(product)}>Add To Cart</button>
                                 </div>
                             </div>

@@ -5,6 +5,8 @@ import { fetchCartProductsRequest, fetchAddCartRequest, fetchRemoveCartRequest }
 import "../styles/CartPage.scss";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
+import Breadcrumbs from "../utils/BreadCrumbs";
+import { FormatCurrency } from "../utils/FormatCurrency";
 
 const CartPage = () => {
   let { cart } = useSelector((state) => state.cart);
@@ -40,6 +42,7 @@ const CartPage = () => {
 
   return (
     <div className="cart-main-container">
+      <Breadcrumbs />
       <div className="cart-main-page">
         {cart.length === 0 ? (
           <p className="empty-page-msg">Your cart is empty</p>
@@ -62,13 +65,13 @@ const CartPage = () => {
                 </div>
 
                 <div className="remove-btn-div">
-                  <p>₹{item.price}</p>
+                  <p>₹{FormatCurrency(item.price, "en-IN")}</p>
                   <button onClick={() => removeCartItem(item._id)} className="remove-btn">Remove</button>
                 </div>
               </div>
             ))}
             {/* <h3>Total: ${totalPrice.toFixed(2)}</h3> */}
-            <h3>Total: ₹{totalPrice.toFixed(2)}</h3>
+            <h3>Total: ₹{FormatCurrency(totalPrice.toFixed(2), "en-IN")}</h3>
 
             <button className="checkout-button">Proceed to Checkout</button>
           </div>

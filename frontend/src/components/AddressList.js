@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAddressRequest, fetchAddAddressRequest, fetchDeleteAddressRequest, fetchUpdateAddressRequest } from "../actions/addressListActions";
 import "../styles/AddressList.scss";
 import Footer from "./Footer";
+import Breadcrumbs from "../utils/BreadCrumbs";
 
 const AddressList = () => {
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ const AddressList = () => {
   return (
 
     <div className="address-main-container">
+      <Breadcrumbs />
       <div className="address-main-page">
         <div className="address-add-page">
           <h2 className="add-address-h2">Add Address</h2>

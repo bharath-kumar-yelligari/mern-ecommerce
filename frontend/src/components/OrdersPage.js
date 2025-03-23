@@ -4,6 +4,8 @@ import { fetchOrdersRequest } from "../actions/ordersActions";
 import "../styles/OrdersPage.scss";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
+import Breadcrumbs from "../utils/BreadCrumbs";
+import { FormatCurrency } from "../utils/FormatCurrency";
 
 const OrdersPage = () => {
   let { orders } = useSelector((state) => state.orders);
@@ -18,6 +20,7 @@ const OrdersPage = () => {
 
   return (
     <div className="delivery-main-container">
+      <Breadcrumbs />
       <div className="delivery-main-page">
         {orders.length === 0 ? (
           <p className="empty-page-msg">Your dont' have any orders</p>
@@ -41,8 +44,10 @@ const OrdersPage = () => {
                 <div className="delivery-main-div">
                   <div className="delivery-div">
                     <span className="order-symbol" style={{ backgroundColor: (item.deliveryStatus === 'Delivered') ? "green" : "orange" }}></span>
-                    <span>{item.deliveryStatus}</span>
+                    <span className="delivery-status">{item.deliveryStatus}</span>
                   </div>
+                  {(item.deliveryStatus === 'Delivered') && <span className="delivery-msg">Your item has been delivered</span>}
+                  <span className="price">₹{FormatCurrency(item.price, "en-IN")}</span>
                 </div>
               </div>
             ))}

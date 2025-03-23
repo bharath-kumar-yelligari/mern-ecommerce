@@ -46,10 +46,24 @@
 
 .delivery-main-div {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
 
     span {
         margin: 0px;
+    }
+
+    .delivery-msg {
+        margin: 5px 0 0 0;
+    }
+
+    .delivery-status {
+        font-weight: 500;
+    }
+
+    .price {
+        margin-top: 10px;
+        font-size: 18px;
     }
 
     .delivery-div {

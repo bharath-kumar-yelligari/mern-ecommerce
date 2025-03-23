@@ -14,7 +14,8 @@ const Breadcrumbs = () => {
 
         return (
           <span key={routeTo}>
-            <FaChevronRight style={styles.icon} />
+            {/* <FaChevronRight style={styles.icon} /> */}
+            <span style={styles.icon}>/</span>
             {isLast ? (
               <span style={styles.active}>{decodeURIComponent(name)}</span>
             ) : (
@@ -28,10 +29,19 @@ const Breadcrumbs = () => {
 };
 
 const styles = {
-  breadcrumbs: { padding: "10px 0", fontSize: "16px", display: "flex", alignItems: "center" },
-  link: { textDecoration: "none", color: "#007bff", marginRight: "10px" },
+  // breadcrumbs: { padding: "10px 0 0 10px", fontSize: "16px", display: "flex", alignItems: "center" },
+  breadcrumbs: {
+    border: "1px solid #ddd",
+    padding: "2px",
+    fontSize: "16px",
+    display: "flex",
+    alignItems: "center",
+    margin: "10px 0px 0px 10px",
+    width: "fit-content"
+  },
+  link: { textDecoration: "none", color: "#007bff", marginRight: "5px" },
   active: { fontWeight: "bold", color: "#000", marginRight: "10px" },
-  icon: { marginRight: "10px", color: "#aaa" },
+  icon: { marginRight: "5px", color: "#aaa" },
 };
 
 export default Breadcrumbs;

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate  } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard"
 import ProductDetails from "./components/ProductDetails"
@@ -17,11 +17,10 @@ function App() {
   return (
     <Router>
       <Header />
-      <Breadcrumbs />
       <Routes>
         {/* Default Route - Redirect to Home */}
         {/* <Route path="/" element={<ProtectedRoute><Navigate to="/home" /> </ProtectedRoute>} /> */}
-        
+
         <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/login" element={<Login />} />
         <Route exact path='/product/:id' element={<ProtectedRoute><ProductDetails /></ProtectedRoute>} />
@@ -29,8 +28,8 @@ function App() {
         <Route path="/orders" element={<ProtectedRoute><OrdersPage /></ProtectedRoute>} />
         <Route path="/address" element={<ProtectedRoute><AddressList /></ProtectedRoute>} />
 
-         {/* 404 Page - Handles unmatched routes */}
-         <Route path="*" element={<NotFound />} />
+        {/* 404 Page - Handles unmatched routes */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

@@ -6,7 +6,9 @@ import { fetchProductDetailsRequest } from "../actions/productActions";
 import "../styles/ProductDetails.scss";
 import { FaShippingFast, FaArrowAltCircleDown } from "react-icons/fa";
 import Footer from "./Footer";
-import StarRating from "../utils/starRating";
+import StarRating from "../utils/StarRating";
+import Breadcrumbs from "../utils/BreadCrumbs";
+import { FormatCurrency } from "../utils/FormatCurrency";
 
 const ProductDetails = () => {
   const { id } = useParams(); // Get product ID from URL
@@ -34,6 +36,7 @@ const ProductDetails = () => {
 
   return (
     <div className="product-details-container">
+      <Breadcrumbs />
       <div className="product-details">
         <div className="image-block">
           {selectedImage && <img className="main-image" src={selectedImage} alt="thumbnail" />}
@@ -59,7 +62,7 @@ const ProductDetails = () => {
           <p className="description">{selectedProduct.description}</p>
           <div className="details-rating-div"><p > {selectedProduct.rating}</p> <StarRating colorVal={selectedProduct.rating < 4 ? "orange" : "green"} rating={selectedProduct.rating} /> <p > {selectedProduct.ratingQuantity} Ratings</p> </div>
 
-          <h3 className="price">₹{selectedProduct.price}</h3>
+          <h3 className="price">₹{FormatCurrency(selectedProduct.price, "en-IN")}</h3>
           <div className="delivery-details">
             <div className="delivery-div"><p><FaShippingFast /></p>  <p>Free Delivery</p></div>
             <div className="returns-div"> <p><FaArrowAltCircleDown /></p>    <p>7 Days Return Policy</p></div>
