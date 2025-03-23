@@ -1,4 +1,4 @@
-.address-main-container{
+.address-main-container {
     overflow: auto;
     height: calc(100vh - 70px);
 }
@@ -35,6 +35,8 @@
     .contact-details {
         display: flex;
         justify-content: space-between;
+        row-gap: 10px;
+        flex-wrap: wrap;
     }
 
     .address-field {
@@ -72,6 +74,8 @@
     box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
     border-radius: 5px;
     justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 10px;
 
     .address-div {
         display: flex;

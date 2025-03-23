@@ -1,9 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
 import { FaChevronRight } from "react-icons/fa";
 
-const Breadcrumbs = () => {
+const Breadcrumbs = (products) => {
   const location = useLocation();
-  const pathnames = location.pathname.split("/").filter((x) => x);
+  console.log(products)
+  // const pathnames =(location.pathname.includes("/product/")) ? [location.pathname.split("/").filter((x) => x).join(" : ")] :  location.pathname.split("/").filter((x) => x);
+  const pathnames = (location.pathname.includes("/product/")) ? [`product: ${products.products || ""}`] : location.pathname.split("/").filter((x) => x);
 
   return (
     <nav style={styles.breadcrumbs}>

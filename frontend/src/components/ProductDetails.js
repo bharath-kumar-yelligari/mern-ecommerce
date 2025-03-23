@@ -36,7 +36,7 @@ const ProductDetails = () => {
 
   return (
     <div className="product-details-container">
-      <Breadcrumbs />
+      <Breadcrumbs products={selectedProduct.title} />
       <div className="product-details">
         <div className="image-block">
           {selectedImage && <img className="main-image" src={selectedImage} alt="thumbnail" />}
