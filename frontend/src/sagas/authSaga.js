@@ -12,7 +12,7 @@ function* loginUser(action) {
         localStorage.setItem("user", response.data.name);
         localStorage.setItem("token", response.data.token);
         yield put(fetchProductsRequest()); // Fetch products after login
-        action.payload.navigate("/home");
+        action.payload.navigate("/");
     } catch (error) {
         yield put(loginFailure(error.response?.data?.error || "Login failed"));
     }

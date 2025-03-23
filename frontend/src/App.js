@@ -10,17 +10,19 @@ import CartPage from "./components/CartPage";
 import OrdersPage from "./components/OrdersPage";
 import AddressList from "./components/AddressList";
 import NotFound from "./components/NotFound";
+import Breadcrumbs from "./utils/BreadCrumbs";
 
 function App() {
 
   return (
     <Router>
       <Header />
+      <Breadcrumbs />
       <Routes>
         {/* Default Route - Redirect to Home */}
-        <Route path="/" element={<ProtectedRoute><Navigate to="/home" /> </ProtectedRoute>} />
+        {/* <Route path="/" element={<ProtectedRoute><Navigate to="/home" /> </ProtectedRoute>} /> */}
         
-        <Route path="/home" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/login" element={<Login />} />
         <Route exact path='/product/:id' element={<ProtectedRoute><ProductDetails /></ProtectedRoute>} />
         <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
