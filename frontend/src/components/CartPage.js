@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 //import { removeFromCart, updateQuantity } from "../redux/actions";
-import { fetchCartProductsRequest, fetchRemoveCartRequest } from "../actions/cartActions";
+import { fetchCartProductsRequest, fetchAddCartRequest, fetchRemoveCartRequest } from "../actions/cartActions";
 import "../styles/CartPage.scss";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
@@ -14,6 +14,12 @@ const CartPage = () => {
   const removeCartItem = (id) => {
     dispatch(fetchRemoveCartRequest(id));
   }
+
+  const addToCart = (product, action) => {
+    product["action"] = action;
+    dispatch(fetchAddCartRequest(product));
+  }
+
 
   useEffect(() => {
     dispatch(fetchCartProductsRequest()); // Fetch product details
@@ -51,7 +57,7 @@ const CartPage = () => {
                     <h2>{item.title}</h2>
                     <p className="brand">{item.brand}</p>
                     <p>Quantity</p>
-                    <div className="quantity-actions"><p>-</p><p>{item.quantity}</p><p>+</p></div>
+                    <div className="quantity-actions"><p onClick={() => addToCart(item, 'remove')}>-</p><p>{item.quantity}</p><p onClick={() => addToCart(item, 'add')}>+</p></div>
                   </div>
                 </div>
 

@@ -19,21 +19,17 @@ const Dashboard = () => {
 
     useEffect(() => {
         console.log("value", sortOption)
-        let sortOptions = (sortOption === "low-to-high") ? { sort: "price", order: "asc" } : (sortOption === "high-to-low") ? { sort: "price", order: "desc" } : { sort: "popularity", order: "desc" };
-
+        let sortOptions = (sortOption === "low-to-high") ? { sort: "price", order: "asc" } : (sortOption === "high-to-low") ? { sort: "price", order: "desc" } : { sort: "rating", order: "desc" };
 
         dispatch(fetchProductsRequest(sortOptions.sort, sortOptions.order)); // Fetch products when dashboard loads
     }, [dispatch, sortOption]);
 
+    const formatIndianCurrency = (amount) => {
+        return new Intl.NumberFormat("en-IN").format(amount);
+    };
+
     const handleSortChange = (e) => {
         const value = e.target.value;
-        // if (value === "low-to-high") {
-        //   setSortOption({ sort: "price", order: "asc" });
-        // } else if (value === "high-to-low") {
-        //   setSortOption({ sort: "price", order: "desc" });
-        // } else if (value === "popular") {
-        //   setSortOption({ sort: "popularity", order: "desc" });
-        // }
         setSortOption(value)
     };
 
@@ -54,7 +50,6 @@ const Dashboard = () => {
                     {filteredProducts.length > 0 ? (
                         filteredProducts.map((product) => (
                             <div key={product._id} className="product-card">
-
                                 <Link to={`/product/${product._id}`}>
                                     <img src={product.thumbnail} className="product-image" alt="thumbnail" />
                                 </Link>
@@ -63,7 +58,7 @@ const Dashboard = () => {
                                 <div className="rating-div" style={{ backgroundColor: (product.rating < 4) ? "orange" : "green" }}><p>{product.rating}</p><FaStar /></div>
                                 <p className="product-brand">{product.brand}</p>
                                 <div className="price-cart">
-                                    <p> ₹{product.price}</p>
+                                    <p> ₹{formatIndianCurrency(product.price)}</p>
                                     <button className="add-cart-btn" onClick={() => addToCart(product)}>Add To Cart</button>
                                 </div>
                             </div>

@@ -23,18 +23,20 @@ export const cartReducer = (state = initialState, action) => {
     case "FETCH_ADD_CART_SUCCESS":
       // updatedCart = [...state.cart, action.payload.data];
 
+      if (action.payload.cart.action === "remove") {
+        updatedCart = state.cart.filter((item) => item._id !== action.payload.cart._id);
+      } else {
+        updatedCart = state.cart.map((item) =>
+          item.productId === action.payload.cart.productId
+            ? { ...item, quantity: action.payload.cart.quantity } // ✅ Update quantity
+            : item
+        );
 
-      updatedCart = state.cart.map((item) =>
-        item.productId === action.payload.data.productId
-          ? { ...item, quantity: action.payload.data.quantity } // ✅ Update quantity
-          : item
-      );
-
-      // If the item is not found, add it as a new one
-      if (!updatedCart.some((item) => item.productId === action.payload.data.productId)) {
-        updatedCart.push(action.payload.data);
+        // If the item is not found, add it as a new one
+        if (!updatedCart.some((item) => item.productId === action.payload.cart.productId)) {
+          updatedCart.push(action.payload.cart);
+        }
       }
-
 
       localStorage.setItem("cart", JSON.stringify(updatedCart)); // Save to localStorage
 

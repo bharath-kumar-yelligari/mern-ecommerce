@@ -1,22 +1,22 @@
-.cart-main-container{
+.cart-main-container {
     height: calc(100vh - 70px);
     overflow-y: auto;
 }
 
-.cart-main-page{
+.cart-main-page {
     padding: 0px 20px;
     min-height: calc(100vh - 70px);
 }
 
-.cart-page{
+.cart-page {
     display: flex;
     flex-direction: column;
     width: 60%;
     margin-left: 20%;
 }
 
-.cart-item{
-    display:flex;
+.cart-item {
+    display: flex;
     padding: 10px;
     margin-bottom: 10px;
     height: 205px;
@@ -24,58 +24,62 @@
     border-radius: 5px;
     justify-content: space-between;
 
-    .image-details{
-        display:flex;
+    .image-details {
+        display: flex;
         column-gap: 20px;
 
-        h2{
+        h2 {
             margin: 5px;
         }
 
-        p{
-            margin:5px;
+        p {
+            margin: 5px;
         }
     }
 }
 
-.cart-image{
-    height:200px;
-    width:200px;
+.cart-image {
+    height: 200px;
+    width: 200px;
 }
 
-.quantity-actions{
-    display:flex;
+.quantity-actions {
+    display: flex;
     flex-direction: row;
+
+    p {
+        cursor: pointer;
+    }
 }
 
-.remove-btn-div{
-    display:flex;
+.remove-btn-div {
+    display: flex;
     flex-direction: column;
 
-    .remove-btn{
+    .remove-btn {
         color: white;
         border-radius: 5px;
         cursor: pointer;
-        height:30px;
+        height: 30px;
         background-color: #333;
-        border:none;
+        border: none;
 
-        &:hover{
+        &:hover {
             background-color: #222;
         }
     }
 }
 
-.details-card{
-    display:flex;
+.details-card {
+    display: flex;
     flex-direction: column;
 
-    .brand{
-       color: rgba(0, 0, 0, 0.6)
+    .brand {
+        color: rgba(0, 0, 0, 0.6)
     }
 }
 
-.checkout-button{
+.checkout-button {
     height: 50px;
     background-color: #333;
     border-radius: 5px;

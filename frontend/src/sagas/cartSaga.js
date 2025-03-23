@@ -1,7 +1,9 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
-import { fetchCartProductsSuccess, fetchCartProductsFailure, fetchAddCartRequestSuccess,
-   fetchAddCartRequestFailure, fetchRemoveCartRequestSuccess,fetchRemoveCartRequestFailure} from "../actions/cartActions";
+import {
+  fetchCartProductsSuccess, fetchCartProductsFailure, fetchAddCartRequestSuccess,
+  fetchAddCartRequestFailure, fetchRemoveCartRequestSuccess, fetchRemoveCartRequestFailure
+} from "../actions/cartActions";
 
 const fetchCartProductsApi = async () => {
   const response = await axios.get("http://localhost:4000/api/cart"); // Replace with your API
@@ -19,18 +21,18 @@ function* fetchCartProducts() {
 
 
 const fetchAddCartProductsApi = async (product) => {
-  const response = await axios.post("http://localhost:4000/api/cart/add" , product); // Replace with your API
+  const response = await axios.post("http://localhost:4000/api/cart/addOrUpdate", product.payload); // Replace with your API
   return response.data;
 };
 
 
-function* fetchAddCartProducts(product){
-    try {
-      const data = yield call(fetchAddCartProductsApi, product);
-      yield put(fetchAddCartRequestSuccess(data)); // Store products in Redux
-    } catch (error) {
-      yield put(fetchAddCartRequestFailure(error.message || "Failed to load cart"));
-    }
+function* fetchAddCartProducts(product) {
+  try {
+    const data = yield call(fetchAddCartProductsApi, product);
+    yield put(fetchAddCartRequestSuccess(data)); // Store products in Redux
+  } catch (error) {
+    yield put(fetchAddCartRequestFailure(error.message || "Failed to load cart"));
+  }
 }
 
 const fetchRemoveCartProductsApi = async (id) => {
@@ -38,7 +40,7 @@ const fetchRemoveCartProductsApi = async (id) => {
   return response.data;
 };
 
-function* fetchRemoveCartProducts(id){
+function* fetchRemoveCartProducts(id) {
   try {
     const data = yield call(fetchRemoveCartProductsApi, id);
     yield put(fetchRemoveCartRequestSuccess(data)); // Store products in Redux
