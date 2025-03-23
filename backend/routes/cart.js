@@ -21,17 +21,52 @@ router.get('/', async (req, res) => {
 router.post('/add', async (req, res) => {
     try {
         const payload = req.body.payload;
-        const newCartItem = {
-            title: payload.title,
-            productId: payload._id,
-            brand: payload.brand,
-            price: payload.price,
-            thumbnail: payload.thumbnail,
-            quantity: 1
-        }
-        let cart = await Cart.create(newCartItem);
 
-        res.json({ data: cart, message: "cart Updated successfully" });
+        let  productId  = payload.productId;
+
+        console.log("_id", _id)
+        console.log("payload", payload)
+
+        let cartItem = await Cart.findOne({ "productId": payload.productId });
+
+        if (cartItem) {
+            console.log("cart item existing", cartItem)
+
+            cartItem.quantity += 1;
+            await cartItem.save();
+            return res.json({ message: "Cart updated", data: cart });
+        } else {
+            console.log("new cart item", cartItem)
+
+            //  const newCartItem = new Cart({ productId, quantity });
+            //   await newCartItem.save();
+            // return res.json({ message: "Item added to cart", cartItem: newCartItem });
+            const newCartItem = {
+                title: payload.title,
+                productId: payload.productId,
+                brand: payload.brand,
+                price: payload.price,
+                thumbnail: payload.thumbnail,
+                quantity: 1
+            }
+            let cart = await Cart.create(newCartItem);
+
+            res.json({ data: cart, message: "cart Updated successfully" });
+
+        }
+
+
+        // const newCartItem = {
+        //     title: payload.title,
+        //     productId: payload._id,
+        //     brand: payload.brand,
+        //     price: payload.price,
+        //     thumbnail: payload.thumbnail,
+        //     quantity: 1
+        // }
+        // let cart = await Cart.create(newCartItem);
+
+        // res.json({ data: cart, message: "cart Updated successfully" });
     } catch (err) {
         res.status(500).send(err);
     }
@@ -44,7 +79,7 @@ router.delete('/delete/:_id', async (req, res) => {
     console.log(req.params)
     const { _id } = req.params;
     try {
-        console.log("_id",_id)
+        console.log("_id", _id)
         const updatedCart = await Cart.findByIdAndDelete(_id);
 
         console.log("updatedCart", updatedCart)

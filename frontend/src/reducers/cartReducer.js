@@ -11,7 +11,7 @@ export const cartReducer = (state = initialState, action) => {
     case "FETCH_CART_PRODUCTS_REQUEST":
       return { ...state, loading: true, error: null };
     case "FETCH_CART_PRODUCTS_SUCCESS":
-     // return { ...state, loading: false, cart: action.payload };
+      // return { ...state, loading: false, cart: action.payload };
       updatedCart = action.payload;
       localStorage.setItem("cart", JSON.stringify(updatedCart)); // Save to localStorage
 
@@ -21,7 +21,21 @@ export const cartReducer = (state = initialState, action) => {
     case "FETCH_ADD_CART_REQUEST":
       return { ...state, loading: true, error: null };
     case "FETCH_ADD_CART_SUCCESS":
-      updatedCart = [...state.cart, action.payload.data];
+      // updatedCart = [...state.cart, action.payload.data];
+
+
+      updatedCart = state.cart.map((item) =>
+        item.productId === action.payload.data.productId
+          ? { ...item, quantity: action.payload.data.quantity } // ✅ Update quantity
+          : item
+      );
+
+      // If the item is not found, add it as a new one
+      if (!updatedCart.some((item) => item.productId === action.payload.data.productId)) {
+        updatedCart.push(action.payload.data);
+      }
+
+
       localStorage.setItem("cart", JSON.stringify(updatedCart)); // Save to localStorage
 
       return { ...state, loading: false, cart: updatedCart };

@@ -36,7 +36,8 @@ const ProductDetails = () => {
     <div className="product-details-container">
       <div className="product-details">
         <div className="image-block">
-          <img className="main-image" src={selectedImage} alt="thumbnail" />
+          {selectedImage && <img className="main-image" src={selectedImage} alt="thumbnail" />}
+          {/* <img className="main-image" src={selectedImage} alt="thumbnail" /> */}
           <div className="image-gallery">
             {selectedProduct?.images?.length > 0 ? (
               selectedProduct.images.map((img, index) => (
@@ -56,7 +57,7 @@ const ProductDetails = () => {
         <div className="details-block">
           <h2 className="title">{selectedProduct.title}</h2>
           <p className="description">{selectedProduct.description}</p>
-          <div className="rating-div"><p > {selectedProduct.rating}</p> <StarRating rating={selectedProduct.rating} /> <p > {selectedProduct.ratingQuantity} Ratings</p> </div>
+          <div className="details-rating-div"><p > {selectedProduct.rating}</p> <StarRating colorVal={selectedProduct.rating < 4 ? "orange" : "green"} rating={selectedProduct.rating} /> <p > {selectedProduct.ratingQuantity} Ratings</p> </div>
 
           <h3 className="price">₹{selectedProduct.price}</h3>
           <div className="delivery-details">

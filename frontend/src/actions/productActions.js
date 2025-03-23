@@ -1,5 +1,6 @@
-export const fetchProductsRequest = () => ({
+export const fetchProductsRequest = (sort = "price", order = "asc") => ({
     type: "FETCH_PRODUCTS_REQUEST",
+    payload: { sort, order },
 });
 
 export const fetchProductsSuccess = (action) => ({
