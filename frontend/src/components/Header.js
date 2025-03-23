@@ -63,7 +63,7 @@ const Header = ({ onLogout }) => {
   return (
     <header className="header">
       <div className="logo">
-        <Link to="/">🛒 E-Shop</Link>
+        <Link to="/home">🛒 E-Shop</Link>
       </div>
 
       {/* Hamburger Icon for Mobile */}
