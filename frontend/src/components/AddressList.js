@@ -11,7 +11,6 @@ const AddressList = () => {
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
-
   const [address, setAddress] = useState("");
   const [editingId, setEditingId] = useState(null);
 

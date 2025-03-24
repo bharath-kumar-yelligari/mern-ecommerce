@@ -6,18 +6,24 @@ import { Link, useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import Breadcrumbs from "../utils/BreadCrumbs";
 import CartItems from "./CartItems";
+import { fetchAddressRequest } from "../actions/addressListActions";
 
 const CartPage = () => {
   let { cart } = useSelector((state) => state.cart);
+  const { addresses, loading } = useSelector((state) => state.addresses);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const checkoutNavigate = () => {
-    navigate("/cart/checkout")
+    if (!loading && addresses.length > 0) {
+      navigate("/cart/checkout") // Navigate only when data is ready
+    }
   }
 
   useEffect(() => {
     dispatch(fetchCartProductsRequest()); // Fetch product details
+    dispatch(fetchAddressRequest()); // Fetch product details
   }, [dispatch]);
 
   cart = typeof cart === "string" ? JSON.parse(cart) : cart;
@@ -31,7 +37,7 @@ const CartPage = () => {
       <Breadcrumbs />
       <div className="cart-main-page">
         <CartItems cart={cart} />
-        <button className="checkout-button" onClick={() => checkoutNavigate()}>Proceed to Checkout</button>
+        {cart.length > 0 && <button className="checkout-button"  onClick={() => checkoutNavigate()}>Proceed to Checkout</button>}
       </div>
       <Footer />
     </div>

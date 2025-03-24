@@ -31,6 +31,7 @@
     display: none;
     background: #fff;
     transition: max-height 0.3s ease-in-out;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .2);
   }
   
   .accordion-content.open {

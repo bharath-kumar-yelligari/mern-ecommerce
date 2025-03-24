@@ -3,7 +3,6 @@ import { FaChevronRight } from "react-icons/fa";
 
 const Breadcrumbs = (products) => {
   const location = useLocation();
-  console.log(products)
   // const pathnames =(location.pathname.includes("/product/")) ? [location.pathname.split("/").filter((x) => x).join(" : ")] :  location.pathname.split("/").filter((x) => x);
   const pathnames = (location.pathname.includes("/product/")) ? [`product: ${products.products || ""}`] : location.pathname.split("/").filter((x) => x);
 
