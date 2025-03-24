@@ -53,6 +53,7 @@ const CheckoutPage = () => {
   };
 
   const handleEdit = (id, details) => {
+    setSelectedAddress(newAddress)
     setEditingId(id);
     setName(details.name);
     setMobile(details.mobile);
@@ -76,7 +77,14 @@ const CheckoutPage = () => {
     setOpenIndex(1);
   };
 
+  useEffect(() => {
+    console.log("useeffect",addresses)
+
+  }, [addresses])
+  
+
   function clearAddressFields() {
+    console.log("Clear fields",addresses)
     setName("");
     setMobile("");
     setEmail("");
@@ -87,15 +95,26 @@ const CheckoutPage = () => {
     dispatch(fetchDeleteAddressRequest(id));
   };
 
-  const placeOrder = () => {
+  const handleAddressSelection = (address) => {
+    if(address !== newAddress){
+      setEditingId(null)
+    }
+    setSelectedAddress(address)
+    clearAddressFields()
+  }
 
+  const placeOrder = () => {
+    console.log("place order")
+    console.log(cart)
+    console.log(addresses)
+    console.log(address)
+    console.log(selectedAddress)
+    console.log(paymentOption)
   }
 
 
   cart = typeof cart === "string" ? JSON.parse(cart) : cart;
   addresses = typeof addresses === "string" ? JSON.parse(addresses) : addresses;
-  // addresses.push({"_id":"new address"})
-  // setSelectedAddress(addresses[0]._id)
   const totalPrice = cart.length > 0
     ? cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
     : 0;
@@ -109,7 +128,7 @@ const CheckoutPage = () => {
       <div className="checkout-main-page">
         <div className="toggle-details">
           <Accordion
-            title="1.Shipping Address"
+            title="1. Shipping Address"
             isOpen={openIndex === 0}
             toggle={() => toggleAccordion(0)}
           >
@@ -127,7 +146,7 @@ const CheckoutPage = () => {
                           name="address"
                           value={item._id}
                           checked={selectedAddress === item._id}
-                          onChange={() => setSelectedAddress(item._id)}
+                          onChange={() => handleAddressSelection(item._id)}
                         />
                         <div className="address-div">
                           <span className="name">{item.name}</span>
@@ -142,65 +161,71 @@ const CheckoutPage = () => {
                     ))}
                   </div>
                 )}
-                <div className="address-add-page">
-                  <h2 className="add-address-h2">Add Address</h2>
-                  <div className="radio-main-div">
-                    <input
-                      type="radio"
-                      name="address"
-                      value={newAddress}
-                      checked={selectedAddress === newAddress}
-                      onChange={() => setSelectedAddress(newAddress)}
-                    />
-                    <div className="add-new-address-div">
-                      <div className="contact-details">
-                        <div className="address-field">
-                          {/* <label className="field-label">Name</label> */}
-                          <input
-                            type="text"
-                            placeholder="Enter Name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                          />
-                        </div>
+                {selectedAddress !== newAddress && <div className="add-address-h2-link"><h2>+</h2> <h2 className="add-address-h2" onClick={() => handleAddressSelection(newAddress)}> Add Address</h2></div>}
 
-                        <div className="address-field">
-                          {/* <label className="field-label">Mobile</label> */}
-                          <input
-                            type="text"
-                            placeholder="Enter Mobile No"
-                            value={mobile}
-                            onChange={(e) => setMobile(e.target.value)}
-                          />
+                {selectedAddress === newAddress &&
+                  <div className="address-add-page">
+                    <h2 className="add-new-address-h2" >Add new Address</h2>
+                    <div className="radio-main-div">
+                      <input
+                        type="radio"
+                        name="address"
+                        value={newAddress}
+                        checked={selectedAddress === newAddress}
+                        onChange={() => handleAddressSelection(newAddress)}
+                      />
+                      <div className="add-new-address-div">
+                        <div className="contact-details">
+                          <div className="address-field">
+                            {/* <label className="field-label">Name</label> */}
+                            <input
+                              type="text"
+                              placeholder="Enter Name"
+                              value={name}
+                              onChange={(e) => setName(e.target.value)}
+                            />
+                          </div>
+
+                          <div className="address-field">
+                            {/* <label className="field-label">Mobile</label> */}
+                            <input
+                              type="text"
+                              placeholder="Enter Mobile No"
+                              value={mobile}
+                              onChange={(e) => setMobile(e.target.value)}
+                            />
+                          </div>
+                          <div className="address-field">
+                            {/* <label className="field-label">Email</label> */}
+                            <input
+                              type="text"
+                              placeholder="Enter Email"
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
+                            />
+                          </div>
                         </div>
                         <div className="address-field">
-                          {/* <label className="field-label">Email</label> */}
-                          <input
+                          {/* <label className="field-label">Address</label> */}
+                          <textarea
                             type="text"
-                            placeholder="Enter Email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Enter address"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
                           />
                         </div>
-                      </div>
-                      <div className="address-field">
-                        {/* <label className="field-label">Address</label> */}
-                        <textarea
-                          type="text"
-                          placeholder="Enter address"
-                          value={address}
-                          onChange={(e) => setAddress(e.target.value)}
-                        />
                       </div>
                     </div>
+                    {editingId ? (
+                      <button className="add-btn checkout-add-btn" onClick={handleUpdate}>✅ Update and Proceed</button>
+                    ) : (
+                      <button className="add-btn checkout-add-btn" onClick={handleAddAddress}>➕ Add and Proceed</button>
+                    )}
                   </div>
-                  {editingId ? (
-                    <button className="add-btn" onClick={handleUpdate}>✅ Update</button>
-                  ) : (
-                    <button className="add-btn" onClick={handleAddAddress}>➕ Add</button>
-                  )}
-                </div>
-                <button className="continue-btn" disabled={selectedAddress === null} onClick={() => setOpenIndex(1)}> Continue</button>
+                }
+                {selectedAddress !== newAddress &&
+                  <button className="continue-btn" disabled={selectedAddress === null} onClick={() => setOpenIndex(1)}> Continue</button>
+                }
               </div>
             </div>
           </Accordion>
@@ -248,7 +273,7 @@ const CheckoutPage = () => {
           <div className="shipping-field"><span>Shipping </span><span className="shipping-value">Free</span></div>
           <div className="tax-field"><span>Platform Fee </span><span>{FormatCurrency(platformFee, "en-IN")}</span></div>
           <div className="total-field"><span>Total </span><span>{FormatCurrency(totalOrderAmount, "en-IN")}</span></div>
-          <button className="continue-btn" disabled={selectedAddress === null} onClick={handleAddAddress}> Place Order</button>
+          <button className="continue-btn" disabled={selectedAddress === null} onClick={() => placeOrder()}> Place Order</button>
         </div>
       </div>
 

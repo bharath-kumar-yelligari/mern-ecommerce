@@ -1,5 +1,5 @@
 const initialState = {
-    addresses: localStorage.getItem("orders") || [],
+    addresses: localStorage.getItem("addresses") || [],
     loading: false,
     error: null,
 };
