@@ -12,8 +12,8 @@ import { FormatCurrency } from "../utils/FormatCurrency.js";
 
 const CheckoutPage = () => {
   const [openIndex, setOpenIndex] = useState(0); // Default open first section
-  const [selectedAddress, setSelectedAddress] = useState(null);
   let { addresses } = useSelector((state) => state.addresses);
+  const [selectedAddress, setSelectedAddress] = useState(null);
   let { cart } = useSelector((state) => state.cart);
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
@@ -44,6 +44,11 @@ const CheckoutPage = () => {
   // }, [dispatch]);
 
   const toggleAccordion = (index) => {
+    if (index === 1 || index === 2) {
+      if (!selectedAddress) {
+        return;
+      }
+    }
     setOpenIndex(openIndex === index ? -1 : index);
   };
 
@@ -58,7 +63,8 @@ const CheckoutPage = () => {
   const handleAddAddress = () => {
     if (address.trim()) {
       dispatch(fetchAddAddressRequest({ name, mobile, email, address: address }));
-      clearAddressFields()
+      clearAddressFields();
+      setOpenIndex(1);
     }
   };
 
@@ -66,7 +72,8 @@ const CheckoutPage = () => {
   const handleUpdate = () => {
     dispatch(fetchUpdateAddressRequest({ id: editingId, name, mobile, email, address }));
     setEditingId(null);
-    clearAddressFields()
+    clearAddressFields();
+    setOpenIndex(1);
   };
 
   function clearAddressFields() {
@@ -84,10 +91,6 @@ const CheckoutPage = () => {
 
   }
 
-  const updateAddressSelection = (address)=>{
-    console.log(address)
-
-  }
 
   cart = typeof cart === "string" ? JSON.parse(cart) : cart;
   addresses = typeof addresses === "string" ? JSON.parse(addresses) : addresses;
@@ -98,6 +101,7 @@ const CheckoutPage = () => {
     : 0;
   const platformFee = 10;
   const totalOrderAmount = totalPrice + platformFee;
+  const newAddress = "new";
 
   return (
     <div className="checkoutPage-main-container">
@@ -123,7 +127,7 @@ const CheckoutPage = () => {
                           name="address"
                           value={item._id}
                           checked={selectedAddress === item._id}
-                          onChange={() => updateAddressSelection(item)}
+                          onChange={() => setSelectedAddress(item._id)}
                         />
                         <div className="address-div">
                           <span className="name">{item.name}</span>
@@ -144,9 +148,9 @@ const CheckoutPage = () => {
                     <input
                       type="radio"
                       name="address"
-                      value={address._id}
-                      checked={selectedAddress === address._id}
-                      onChange={() => updateAddressSelection(address) }
+                      value={newAddress}
+                      checked={selectedAddress === newAddress}
+                      onChange={() => setSelectedAddress(newAddress)}
                     />
                     <div className="add-new-address-div">
                       <div className="contact-details">
@@ -196,7 +200,7 @@ const CheckoutPage = () => {
                     <button className="add-btn" onClick={handleAddAddress}>➕ Add</button>
                   )}
                 </div>
-                <button className="continue-btn" disabled={selectedAddress === null} onClick={handleAddAddress}> Continue</button>
+                <button className="continue-btn" disabled={selectedAddress === null} onClick={() => setOpenIndex(1)}> Continue</button>
               </div>
             </div>
           </Accordion>
@@ -208,7 +212,7 @@ const CheckoutPage = () => {
           >
             <div className="cart-summary">
               <CartItems cart={cart} />
-              <button className="continue-btn" disabled={selectedAddress === null} onClick={handleAddAddress}> Continue</button>
+              <button className="continue-btn" disabled={selectedAddress === null} onClick={() => setOpenIndex(2)}> Continue</button>
             </div>
 
           </Accordion>
@@ -223,7 +227,7 @@ const CheckoutPage = () => {
                   <div className="option-div">
                     <input
                       type="radio"
-                      name="address"
+                      name="payment"
                       value={item.id}
                       checked={paymentOption === item.id}
                       onChange={() => setPaymentOption(item.id)}
@@ -232,8 +236,7 @@ const CheckoutPage = () => {
                   </div>
                 </div>
               ))}
-
-              <button className="continue-btn" disabled={selectedAddress === null} onClick={placeOrder}> Place Order</button>
+              <button className="continue-btn" disabled={selectedAddress === null} onClick={() => setOpenIndex(-1)}> Continue</button>
 
             </div>
           </Accordion>
