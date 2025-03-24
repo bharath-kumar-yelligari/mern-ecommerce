@@ -117,7 +117,7 @@ const AddressList = () => {
                   <span className="name">{item.name}</span>
                   <span>{item.mobile}</span>
                   <span>{item.email}</span>
-                  <span><b>Address:</b> {item.address}</span>
+                  <span className="address-field"><b>Address:</b> {item.address}</span>
                 </div>
                 <div className="action-btns-div">
                   <button onClick={() => handleEdit(item._id, item)}>✏️ Edit</button>

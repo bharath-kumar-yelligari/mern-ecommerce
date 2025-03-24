@@ -11,6 +11,7 @@ import OrdersPage from "./components/OrdersPage";
 import AddressList from "./components/AddressList";
 import NotFound from "./components/NotFound";
 import Breadcrumbs from "./utils/BreadCrumbs";
+import CheckoutPage from "./components/CheckoutPage";
 
 function App() {
 
@@ -25,6 +26,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route exact path='/product/:id' element={<ProtectedRoute><ProductDetails /></ProtectedRoute>} />
         <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
+        <Route path="/cart/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
+
         <Route path="/orders" element={<ProtectedRoute><OrdersPage /></ProtectedRoute>} />
         <Route path="/address" element={<ProtectedRoute><AddressList /></ProtectedRoute>} />
 
