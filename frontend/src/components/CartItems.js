@@ -1,14 +1,13 @@
 import React from 'react'
 import "../styles/CartPage.scss";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FormatCurrency } from "../utils/FormatCurrency";
 import { fetchAddCartRequest, fetchRemoveCartRequest } from "../actions/cartActions";
 
 function CartItems({ cart = [] }) {
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const removeCartItem = (id) => {
     dispatch(fetchRemoveCartRequest(id));
@@ -20,7 +19,6 @@ function CartItems({ cart = [] }) {
   }
 
   cart = typeof cart === "string" ? JSON.parse(cart) : cart;
-
   const totalPrice = cart.length > 0
     ? cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
     : 0;

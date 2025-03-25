@@ -42,7 +42,6 @@ const OrdersPage = () => {
                       <Link to={`/product/${product.productId}`}>
                         <img className="delivery-image" src={product.thumbnail} alt={product.name} />
                       </Link>
-                      {/* <img className="cart-image" src={item.thumbnail} alt={item.name} /> */}
                       <div className="details-card">
                         <h2>{product.title}</h2>
                         <p className="brand">{product.brand}</p>

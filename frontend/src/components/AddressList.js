@@ -6,13 +6,13 @@ import Footer from "./Footer";
 import Breadcrumbs from "../utils/BreadCrumbs";
 
 const AddressList = () => {
-  const dispatch = useDispatch();
   let { addresses } = useSelector((state) => state.addresses);
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [editingId, setEditingId] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchAddressRequest());
@@ -61,7 +61,6 @@ const AddressList = () => {
           <h2 className="add-address-h2">Add Address</h2>
           <div className="contact-details">
             <div className="address-field">
-              {/* <label className="field-label">Name</label> */}
               <input
                 type="text"
                 placeholder="Enter Name"
@@ -71,7 +70,6 @@ const AddressList = () => {
             </div>
 
             <div className="address-field">
-              {/* <label className="field-label">Mobile</label> */}
               <input
                 type="text"
                 placeholder="Enter Mobile No"
@@ -80,7 +78,6 @@ const AddressList = () => {
               />
             </div>
             <div className="address-field">
-              {/* <label className="field-label">Email</label> */}
               <input
                 type="text"
                 placeholder="Enter Email"
@@ -90,7 +87,6 @@ const AddressList = () => {
             </div>
           </div>
           <div className="address-field">
-            {/* <label className="field-label">Address</label> */}
             <textarea
               type="text"
               placeholder="Enter address"
@@ -127,7 +123,6 @@ const AddressList = () => {
           </div>
         )}
       </div>
-
       <Footer />
     </div>
 

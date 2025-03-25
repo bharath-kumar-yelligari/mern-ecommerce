@@ -30,4 +30,8 @@ export const fetchAddOrderFailure = (error) => ({
     payload: error
 });
 
+export const resetOrderState = () => ({
+    type: "RESET_ORDER_STATE",
+});
+
 

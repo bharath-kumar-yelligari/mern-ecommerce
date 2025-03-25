@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProductsRequest } from "../actions/productActions";
 import { fetchAddCartRequest } from "../actions/cartActions";
 import { FaStar } from "react-icons/fa"; // Star icons
-
 import "../styles/Dashboard.scss";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
@@ -12,7 +11,7 @@ import { FormatCurrency } from "../utils/FormatCurrency";
 
 const Dashboard = () => {
     const dispatch = useDispatch();
-    const { products, filteredProducts, loading, error } = useSelector((state) => state.products);
+    const { filteredProducts, loading, error } = useSelector((state) => state.products);
     const [sortOption, setSortOption] = useState("low-to-high");
 
     const addToCart = (product) => {
@@ -21,7 +20,6 @@ const Dashboard = () => {
 
     useEffect(() => {
         let sortOptions = (sortOption === "low-to-high") ? { sort: "price", order: "asc" } : (sortOption === "high-to-low") ? { sort: "price", order: "desc" } : { sort: "rating", order: "desc" };
-
         dispatch(fetchProductsRequest(sortOptions.sort, sortOptions.order)); // Fetch products when dashboard loads
     }, [dispatch, sortOption]);
 
@@ -51,7 +49,6 @@ const Dashboard = () => {
                                 <Link to={`/product/${product._id}`}>
                                     <img src={product.thumbnail} className="product-image" alt="thumbnail" />
                                 </Link>
-                                {/* <img src={product.thumbnail} className="product-image" alt="thumbnail" /> */}
                                 <h2 className="product-title">{product.title}</h2>
                                 <div className="rating-div" style={{ backgroundColor: (product.rating < 4) ? "orange" : "green" }}><p>{product.rating}</p><FaStar /></div>
                                 <p className="product-brand">{product.brand}</p>

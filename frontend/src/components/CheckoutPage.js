@@ -1,30 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/CheckoutPage.scss";
-import CartPage from "../components/CartPage.js";
-import { fetchAddressRequest, fetchAddAddressRequest, fetchDeleteAddressRequest, fetchUpdateAddressRequest } from "../actions/addressListActions";
+import {fetchAddAddressRequest, fetchUpdateAddressRequest } from "../actions/addressListActions";
 import Accordion from "../utils/Accordion.js";
 import Breadcrumbs from "../utils/BreadCrumbs.js";
 import "../styles/AddressList.scss";
 import CartItems from "./CartItems.js";
 import { useNavigate } from "react-router-dom";
 import { FormatCurrency } from "../utils/FormatCurrency.js";
-import { fetchAddOrderRequest, fetchOrdersRequest } from "../actions/ordersActions.js";
+import { fetchAddOrderRequest, fetchOrdersRequest, resetOrderState } from "../actions/ordersActions.js";
 
 const CheckoutPage = () => {
   const [openIndex, setOpenIndex] = useState(0); // Default open first section
   let { addresses } = useSelector((state) => state.addresses);
-  const [selectedAddress, setSelectedAddress] = useState(null);
   let { cart } = useSelector((state) => state.cart);
   const { success } = useSelector((state) => state.orders); // Track order success
 
+  const [selectedAddress, setSelectedAddress] = useState(null);
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [editingId, setEditingId] = useState(null);
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Initialize navigation
+  const navigate = useNavigate(); 
+  const newAddress = "new";
+  const platformFee = 0;
 
   const [paymentOption, setPaymentOption] = useState(1)
   const paymentOptions = [{
@@ -88,13 +89,19 @@ const CheckoutPage = () => {
   }, [addresses])
 
   useEffect(() => {
+    if (cart.length === 0) {
+      navigate("/cart"); // ✅ Redirect to cart when we remove all items from checkout cart
+    }
+  }, [cart])
+
+  useEffect(() => {
     dispatch(fetchOrdersRequest()); // Fetch product details
   }, [dispatch]);
 
-  // Redirect after order is placed
   useEffect(() => {
     if (success) {
-      navigate("/orders"); // ✅ Redirect to Orders page
+      navigate("/orders"); // ✅ Redirect to Orders page after order is placed
+      dispatch(resetOrderState());
     }
   }, [success, navigate]);
 
@@ -132,9 +139,7 @@ const CheckoutPage = () => {
   const totalPrice = cart.length > 0
     ? cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
     : 0;
-  const platformFee = 0;
   const totalOrderAmount = totalPrice + platformFee;
-  const newAddress = "new";
 
   return (
     <div className="checkoutPage-main-container">
@@ -185,7 +190,6 @@ const CheckoutPage = () => {
                     ) : (
                       <h2 className="add-new-address-h2" >Add new Address</h2>
                     )}
-                    {/* <h2 className="add-new-address-h2" >Add new Address</h2> */}
                     <div className="radio-main-div">
                       <input
                         type="radio"
@@ -197,7 +201,6 @@ const CheckoutPage = () => {
                       <div className="add-new-address-div">
                         <div className="contact-details">
                           <div className="address-field">
-                            {/* <label className="field-label">Name</label> */}
                             <input
                               type="text"
                               placeholder="Enter Name"
@@ -207,7 +210,6 @@ const CheckoutPage = () => {
                           </div>
 
                           <div className="address-field">
-                            {/* <label className="field-label">Mobile</label> */}
                             <input
                               type="text"
                               placeholder="Enter Mobile No"
@@ -216,7 +218,6 @@ const CheckoutPage = () => {
                             />
                           </div>
                           <div className="address-field">
-                            {/* <label className="field-label">Email</label> */}
                             <input
                               type="text"
                               placeholder="Enter Email"
@@ -226,7 +227,6 @@ const CheckoutPage = () => {
                           </div>
                         </div>
                         <div className="address-field">
-                          {/* <label className="field-label">Address</label> */}
                           <textarea
                             type="text"
                             placeholder="Enter address"

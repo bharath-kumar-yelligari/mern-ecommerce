@@ -39,7 +39,6 @@ const ProductDetails = () => {
       <div className="product-details">
         <div className="image-block">
           {selectedImage && <img className="main-image" src={selectedImage} alt="thumbnail" />}
-          {/* <img className="main-image" src={selectedImage} alt="thumbnail" /> */}
           <div className="image-gallery">
             {selectedProduct?.images?.length > 0 ? (
               selectedProduct.images.map((img, index) => (

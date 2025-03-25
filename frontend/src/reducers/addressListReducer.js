@@ -12,7 +12,7 @@ export const addressListReducer = (state = initialState, action) => {
             return { ...state, loading: true, error: null };
         case "FETCH_ADDRESS_SUCCESS":
             updatedAddress = action.payload;
-            localStorage.setItem("addresses", JSON.stringify(updatedAddress)); // Save to localStorage
+            localStorage.setItem("addresses", JSON.stringify(updatedAddress)); 
             return { ...state, loading: false, addresses: updatedAddress };
         case "FETCH_ADDRESS_FAILURE":
             return { ...state, loading: false, error: action.payload };

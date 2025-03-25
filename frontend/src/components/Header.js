@@ -99,11 +99,6 @@ const Header = ({ onLogout }) => {
         {/* User Section */}
         <div className="user-section">
           {user ? (
-            // <div className="user-info">
-            //   <FaUser className="user-icon" />Hey  {user}
-            //   <button className="logout-btn" onClick={handleLogout}>Logout</button>
-            // </div>
-
             <div className="profile-dropdown" ref={dropdownRef}>
               <button className="dropdown-btn" onClick={() => setShowDropdown(!showDropdown)}>
                 <FaUser className="user-icon" />Hey  {user} ▼

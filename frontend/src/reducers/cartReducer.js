@@ -46,21 +46,17 @@ export const cartReducer = (state = initialState, action) => {
     case "FETCH_REMOVE_CART_REQUEST":
       return { ...state, loading: true, error: null };
     case "FETCH_REMOVE_CART_SUCCESS":
-      //return { ...state, loading: false, cart: state.cart.filter((item) => item._id !== action.payload.cart._id) };
       updatedCart = state.cart.filter((item) => item._id !== action.payload.cart._id);
-      localStorage.setItem("cart", JSON.stringify(updatedCart)); // Save to localStorage
+      localStorage.setItem("cart", JSON.stringify(updatedCart)); 
       return { ...state, loading: false, cart: updatedCart };
-
     case "FETCH_REMOVE_CARTS_FAILURE":
       return { ...state, loading: false, error: action.payload };
-
     case "FETCH_CLEAR_CART_REQUEST":
       return { ...state, loading: true, error: null };
     case "FETCH_CLEAR_CART_SUCCESS":
       updatedCart = []
       localStorage.setItem("cart", JSON.stringify(updatedCart));
       return { ...state, loading: false, cart: updatedCart };
-
     case "FETCH_CLEAR_CARTS_FAILURE":
       return { ...state, loading: false, error: action.payload };
     default:
