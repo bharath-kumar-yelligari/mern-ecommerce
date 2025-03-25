@@ -10,8 +10,6 @@ let updateAddress = [];
 router.get('/', async (req, res) => {
     try {
         address = await Address.find();
-        console.log("orders find", address)
-
         res.json(address);
     } catch (err) {
         res.status(500).send(err);
@@ -22,8 +20,6 @@ router.get('/', async (req, res) => {
 // Add item to cart
 router.post('/', async (req, res) => {
     try {
-        console.log("newOrder inside")
-
         let { name, mobile, email, address } = req.body;
         let newAddress = {
             name: name,
@@ -31,8 +27,6 @@ router.post('/', async (req, res) => {
             email: email,
             address: address,
         }
-
-        console.log("newAddress", newAddress)
 
         let addressTemp = await Address.create(newAddress);
 
@@ -45,16 +39,11 @@ router.post('/', async (req, res) => {
 
 // Delete address item
 router.delete('/delete/:_id', async (req, res) => {
-    console.log(req.params)
     const { _id } = req.params;
     try {
-        console.log("_id", _id)
         updateAddress = await Address.findByIdAndDelete(_id);
 
-        console.log("delete address", updateAddress)
-
         if (!updateAddress) {
-            // { success: false, message: "No cart found with this product" };
             return res.json({ success: false, message: "No Address found" });
         }
         return res.json({ success: true, address: updateAddress });

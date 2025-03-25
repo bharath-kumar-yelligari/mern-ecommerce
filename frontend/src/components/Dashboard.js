@@ -20,7 +20,6 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        console.log("value", sortOption)
         let sortOptions = (sortOption === "low-to-high") ? { sort: "price", order: "asc" } : (sortOption === "high-to-low") ? { sort: "price", order: "desc" } : { sort: "rating", order: "desc" };
 
         dispatch(fetchProductsRequest(sortOptions.sort, sortOptions.order)); // Fetch products when dashboard loads

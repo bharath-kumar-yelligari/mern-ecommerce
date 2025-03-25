@@ -21,7 +21,6 @@ const ProductDetails = () => {
   }
 
   useEffect(() => {
-    console.log("id", id)
     dispatch(fetchProductDetailsRequest(id)); // Fetch product details
   }, [dispatch, id]);
 

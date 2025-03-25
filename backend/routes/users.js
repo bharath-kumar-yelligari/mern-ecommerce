@@ -11,17 +11,14 @@ router.get("/register", async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = new User({ email, password: hashedPassword });
     let user = await newUser.save();
-    console.log("user", user)
     res.json({ message: "User registered successfully" });
 });
 
 
 // **Login Route**
 router.post("/login", async (req, res) => {
-    console.log("req.body", req.body)
     const { email, password } = req.body;
     const user = await User.findOne({ email });
-    console.log("user", user)
 
     if (!user) return res.status(400).json({ error: "User not found" });
 

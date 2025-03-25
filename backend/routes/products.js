@@ -6,7 +6,6 @@ const router = express.Router();
 // Get all products
 router.get('/', async (req, res) => {
     try {
-        console.log("req.query", req.query)
         const { sort, order } = req.query; // Example: ?sort=price&order=asc
         let sortQuery = {};
 
@@ -30,7 +29,6 @@ router.get('/:id', async (req, res) => {
         if (!product) {
             return res.status(404).send('Product not found');
         }
-        console.log("product found")
         res.json(product);
     } catch (err) {
         res.status(500).send(err);

@@ -10,19 +10,16 @@ const fetchAddressApi = async () => {
 };
 
 const fetchAddAddressApi = async (address) => {
-  console.log(address)
   const response = await axios.post("http://localhost:4000/api/address" , address.payload); // Replace with your API
   return response.data;
 };
 
 const fetchUpdateAddressApi = async (address) => {
-  console.log(address)
   const response = await axios.put("http://localhost:4000/api/address/update/"+ address.payload.id , address.payload); // Replace with your API
   return response.data;
 };
 
 const fetchDeleteAddressApi = async (address) => {
-  console.log(address)
   const response = await axios.delete("http://localhost:4000/api/address/delete/" + address.payload); // Replace with your API
   return response.data;
 };

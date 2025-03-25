@@ -9,7 +9,6 @@ let productId;
 router.get('/', async (req, res) => {
     try {
         cart = await Cart.find();
-        console.log("cart find", cart)
         res.json(cart);
     } catch (err) {
         res.status(500).send(err);
@@ -27,11 +26,8 @@ router.post('/addOrUpdate', async (req, res) => {
             productId = payload.productId;
         }
 
-        console.log("payload", payload.action)
-
         let cartItem = await Cart.findOne({ productId });
         if (cartItem) {
-            console.log("cart item existing", cartItem)
             if (payload.action === "remove") {
                 if (cartItem.quantity > 1) {
                     cartItem.quantity -= 1;
@@ -48,8 +44,6 @@ router.post('/addOrUpdate', async (req, res) => {
 
             return res.json({ message: "Cart updated", cart: cart });
         } else {
-            console.log("new cart item", cartItem)
-
             const newCartItem = {
                 title: payload.title,
                 productId: payload._id,
@@ -71,13 +65,9 @@ router.post('/addOrUpdate', async (req, res) => {
 
 // Delete cart item
 router.delete('/delete/:_id', async (req, res) => {
-    console.log(req.params)
     const { _id } = req.params;
     try {
-        console.log("_id", _id)
         cart = await Cart.findByIdAndDelete(_id);
-
-        console.log("updatedCart", cart)
 
         if (!cart) {
             // { success: false, message: "No cart found with this product" };
@@ -93,7 +83,6 @@ router.delete('/delete/:_id', async (req, res) => {
 router.delete('/clear', async (req, res) => {
     try {
         cart = await Cart.deleteMany({});
-        console.log("updatedCart", cart)
         if (!cart) {
             return res.json({ success: false, message: "No cart found with this product" });
         }

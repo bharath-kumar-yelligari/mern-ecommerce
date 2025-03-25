@@ -99,7 +99,6 @@ const CheckoutPage = () => {
   }, [success, navigate]);
 
   function clearAddressFields() {
-    console.log("Clear fields", addresses)
     setName("");
     setMobile("");
     setEmail("");
@@ -115,7 +114,6 @@ const CheckoutPage = () => {
   }
 
   const placeOrder = () => {
-    console.log("place order")
     let shippingDetails = addresses.filter((el) => el._id === selectedAddress)
     let paymentMode = paymentOptions.filter((el) => el.id === paymentOption)[0].type
     let payload = {
@@ -134,7 +132,7 @@ const CheckoutPage = () => {
   const totalPrice = cart.length > 0
     ? cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
     : 0;
-  const platformFee = 10;
+  const platformFee = 0;
   const totalOrderAmount = totalPrice + platformFee;
   const newAddress = "new";
 

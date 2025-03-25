@@ -9,8 +9,7 @@ let orders = []; // Temporary in-memory order storage
 // Get all orders
 router.get('/', async (req, res) => {
     try {
-        orders = await Orders.find();
-        console.log("orders find", orders)
+        orders = await Orders.find().sort({ createdAt: -1 });
         res.json(orders);
     } catch (err) {
         res.status(500).send(err);
@@ -21,8 +20,6 @@ router.get('/', async (req, res) => {
 // Add item to cart
 router.post('/', async (req, res) => {
     try {
-        console.log("newOrder inside")
-
         const payload = req.body.payload;
         const newOrder = {
             paymentMode: payload.paymentMode,
@@ -30,8 +27,6 @@ router.post('/', async (req, res) => {
             items: payload.items,
             deliveryStatus: payload.deliveryStatus
         }
-
-        console.log("newOrder",newOrder)
 
        orders = await Orders.create(newOrder);
 
