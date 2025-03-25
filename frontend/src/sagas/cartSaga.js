@@ -2,7 +2,8 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 import {
   fetchCartProductsSuccess, fetchCartProductsFailure, fetchAddCartRequestSuccess,
-  fetchAddCartRequestFailure, fetchRemoveCartRequestSuccess, fetchRemoveCartRequestFailure
+  fetchAddCartRequestFailure, fetchRemoveCartRequestSuccess, fetchRemoveCartRequestFailure,
+  fetchClearCartRequestSuccess, fetchClearCartRequestFailure
 } from "../actions/cartActions";
 
 const fetchCartProductsApi = async () => {
@@ -49,8 +50,25 @@ function* fetchRemoveCartProducts(id) {
   }
 }
 
+const fetchClearCartApi = async () => {
+  const response = await axios.delete("http://localhost:4000/api/cart/clear"); // Replace with your API
+  return response.data;
+}
+
+function* fetchClearCart() {
+  try {
+    const data = yield call(fetchClearCartApi);
+    yield put(fetchClearCartRequestSuccess(data)); // Store products in Redux
+  } catch (error) {
+    yield put(fetchClearCartRequestFailure(error.message || "Failed to load cart"));
+  }
+}
+
+
 export function* watchCartProducts() {
   yield takeLatest("FETCH_CART_PRODUCTS_REQUEST", fetchCartProducts);
   yield takeLatest("FETCH_ADD_CART_REQUEST", fetchAddCartProducts);
   yield takeLatest("FETCH_REMOVE_CART_REQUEST", fetchRemoveCartProducts);
+  yield takeLatest("FETCH_CLEAR_CART_REQUEST", fetchClearCart);
+
 }

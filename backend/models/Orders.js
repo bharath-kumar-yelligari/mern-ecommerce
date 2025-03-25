@@ -1,13 +1,11 @@
 const mongoose = require('mongoose');
 
 const ordersSchema = new mongoose.Schema({
-    title: String,
-    productId:String,
-    brand:String,
-    price: Number,
-    thumbnail: String,
-    quantity:Number,
-    deliveryStatus: String
+    items: Array,
+    deliveryStatus: String,
+    shippingDetails: Array,
+    paymentMode: String,
+    createdAt: { type: Date, default: Date.now }
 });
 
 const Orders = mongoose.model('Orders', ordersSchema);

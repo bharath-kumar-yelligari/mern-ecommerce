@@ -90,9 +90,17 @@ router.delete('/delete/:_id', async (req, res) => {
 });
 
 // Clear cart
-router.delete('/clear', (req, res) => {
-    cart = [];
-    res.send('Cart cleared');
+router.delete('/clear', async (req, res) => {
+    try {
+        cart = await Cart.deleteMany({});
+        console.log("updatedCart", cart)
+        if (!cart) {
+            return res.json({ success: false, message: "No cart found with this product" });
+        }
+        return res.json({ success: true, cart: cart });
+    } catch (err) {
+        res.status(500).send(err);
+    }
 });
 
 module.exports = router;

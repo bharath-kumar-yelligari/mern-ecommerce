@@ -48,3 +48,19 @@ export const fetchRemoveCartRequestFailure = (error) => ({
     payload: error
 });
 
+export const fetchClearCartRequest = (action) => ({
+    type: "FETCH_CLEAR_CART_REQUEST",
+    payload: action
+});
+
+export const fetchClearCartRequestSuccess = (action) => ({
+    type: "FETCH_CLEAR_CART_SUCCESS",
+    payload: action
+});
+
+export const fetchClearCartRequestFailure = (error) => ({
+    type: "FETCH_CLEAR_CARTS_FAILURE",
+    payload: error
+});
+
+

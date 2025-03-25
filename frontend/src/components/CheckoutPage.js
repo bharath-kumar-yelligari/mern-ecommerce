@@ -9,12 +9,15 @@ import "../styles/AddressList.scss";
 import CartItems from "./CartItems.js";
 import { useNavigate } from "react-router-dom";
 import { FormatCurrency } from "../utils/FormatCurrency.js";
+import { fetchAddOrderRequest, fetchOrdersRequest } from "../actions/ordersActions.js";
 
 const CheckoutPage = () => {
   const [openIndex, setOpenIndex] = useState(0); // Default open first section
   let { addresses } = useSelector((state) => state.addresses);
   const [selectedAddress, setSelectedAddress] = useState(null);
   let { cart } = useSelector((state) => state.cart);
+  const { success } = useSelector((state) => state.orders); // Track order success
+
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
   const [email, setEmail] = useState("");
@@ -75,28 +78,36 @@ const CheckoutPage = () => {
     setEditingId(null);
     clearAddressFields();
     setOpenIndex(1);
+    setSelectedAddress(editingId)
   };
 
   useEffect(() => {
-    console.log("useeffect",addresses)
-
+    if (selectedAddress === newAddress) {
+      setSelectedAddress(addresses[addresses.length - 1]._id)
+    }
   }, [addresses])
-  
+
+  useEffect(() => {
+    dispatch(fetchOrdersRequest()); // Fetch product details
+  }, [dispatch]);
+
+  // Redirect after order is placed
+  useEffect(() => {
+    if (success) {
+      navigate("/orders"); // ✅ Redirect to Orders page
+    }
+  }, [success, navigate]);
 
   function clearAddressFields() {
-    console.log("Clear fields",addresses)
+    console.log("Clear fields", addresses)
     setName("");
     setMobile("");
     setEmail("");
     setAddress("");
   }
 
-  const handleDelete = (id) => {
-    dispatch(fetchDeleteAddressRequest(id));
-  };
-
   const handleAddressSelection = (address) => {
-    if(address !== newAddress){
+    if (address !== newAddress) {
       setEditingId(null)
     }
     setSelectedAddress(address)
@@ -105,11 +116,16 @@ const CheckoutPage = () => {
 
   const placeOrder = () => {
     console.log("place order")
-    console.log(cart)
-    console.log(addresses)
-    console.log(address)
-    console.log(selectedAddress)
-    console.log(paymentOption)
+    let shippingDetails = addresses.filter((el) => el._id === selectedAddress)
+    let paymentMode = paymentOptions.filter((el) => el.id === paymentOption)[0].type
+    let payload = {
+      "items": cart,
+      "deliveryStatus": "Placed",
+      "shippingDetails": shippingDetails,
+      "paymentMode": paymentMode
+    }
+
+    dispatch(fetchAddOrderRequest(payload))
   }
 
 
@@ -165,7 +181,13 @@ const CheckoutPage = () => {
 
                 {selectedAddress === newAddress &&
                   <div className="address-add-page">
-                    <h2 className="add-new-address-h2" >Add new Address</h2>
+
+                    {editingId ? (
+                      <h2 className="add-new-address-h2" >Edit Address</h2>
+                    ) : (
+                      <h2 className="add-new-address-h2" >Add new Address</h2>
+                    )}
+                    {/* <h2 className="add-new-address-h2" >Add new Address</h2> */}
                     <div className="radio-main-div">
                       <input
                         type="radio"

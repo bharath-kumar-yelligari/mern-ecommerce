@@ -1,6 +1,7 @@
 const initialState = {
     orders: localStorage.getItem("orders") || [],
     loading: false,
+    success: false,
     error: null,
 };
 
@@ -18,14 +19,14 @@ export const ordersReducer = (state = initialState, action) => {
         case "FETCH_ORDERS_FAILURE":
             return { ...state, loading: false, error: action.payload };
         case "FETCH_ADD_ORDER_REQUEST":
-            return { ...state, loading: true, error: null };
+            return { ...state, loading: true, error: null, success: false };
         case "FETCH_ADD_ORDER_SUCCESS":
             updatedOrders = [...state.orders, action.payload.data];
             localStorage.setItem("orders", JSON.stringify(updatedOrders)); // Save to localStorage
 
-            return { ...state, loading: false, orders: updatedOrders };
+            return { ...state, loading: false, orders: updatedOrders, success: true };
         case "FETCH_ADD_ORDER_FAILURE":
-            return { ...state, loading: false, error: action.payload };
+            return { ...state, loading: false, error: action.payload, success: false };
         default:
             return state;
     }

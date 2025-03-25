@@ -25,9 +25,7 @@ const Header = ({ onLogout }) => {
   const handleLogout = () => {
     dispatch(logout());
     setShowDropdown(false); // Close dropdown after logout
-    localStorage.removeItem("token"); // Clear token
-    localStorage.removeItem("user"); // Clear token
-    localStorage.removeItem("cart"); // Clear token
+    localStorage.clear();
     navigate("/login"); // Redirect to login
   };
 
