@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard"
 import ProductDetails from "./components/ProductDetails"
@@ -10,7 +10,6 @@ import CartPage from "./components/CartPage";
 import OrdersPage from "./components/OrdersPage";
 import AddressList from "./components/AddressList";
 import NotFound from "./components/NotFound";
-import Breadcrumbs from "./utils/BreadCrumbs";
 import CheckoutPage from "./components/CheckoutPage";
 
 function App() {

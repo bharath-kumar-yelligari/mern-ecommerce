@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/CheckoutPage.scss";
-import {fetchAddAddressRequest, fetchUpdateAddressRequest } from "../actions/addressListActions";
+import { fetchAddAddressRequest, fetchUpdateAddressRequest } from "../actions/addressListActions";
 import Accordion from "../utils/Accordion.js";
 import Breadcrumbs from "../utils/BreadCrumbs.js";
 import "../styles/AddressList.scss";
@@ -9,6 +9,7 @@ import CartItems from "./CartItems.js";
 import { useNavigate } from "react-router-dom";
 import { FormatCurrency } from "../utils/FormatCurrency.js";
 import { fetchAddOrderRequest, fetchOrdersRequest, resetOrderState } from "../actions/ordersActions.js";
+import validationForm from "../utils/AddressFormValidation.js";
 
 const CheckoutPage = () => {
   const [openIndex, setOpenIndex] = useState(0); // Default open first section
@@ -22,8 +23,9 @@ const CheckoutPage = () => {
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [editingId, setEditingId] = useState(null);
+    const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const newAddress = "new";
   const platformFee = 0;
 
@@ -63,23 +65,48 @@ const CheckoutPage = () => {
     setMobile(details.mobile);
     setEmail(details.email);
     setAddress(details.address);
+    setErrors({});
   };
 
-  const handleAddAddress = () => {
-    if (address.trim()) {
-      dispatch(fetchAddAddressRequest({ name, mobile, email, address: address }));
+  const handleAddAddress = (e) => {
+    // if (address.trim()) {
+    //   dispatch(fetchAddAddressRequest({ name, mobile, email, address: address }));
+    //   clearAddressFields();
+    //   setOpenIndex(1);
+    // }
+
+    e.preventDefault();
+    const newErrors = validationForm(name, mobile, email, address);
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+    } else {
+      setErrors({});
+        dispatch(fetchAddAddressRequest({ name, mobile, email, address: address }));
       clearAddressFields();
       setOpenIndex(1);
     }
   };
 
 
-  const handleUpdate = () => {
-    dispatch(fetchUpdateAddressRequest({ id: editingId, name, mobile, email, address }));
+  const handleUpdate = (e) => {
+    // dispatch(fetchUpdateAddressRequest({ id: editingId, name, mobile, email, address }));
+    // setEditingId(null);
+    // clearAddressFields();
+    // setOpenIndex(1);
+    // setSelectedAddress(editingId)
+
+    e.preventDefault();
+    const newErrors = validationForm(name, mobile, email, address);
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+    } else {
+      setErrors({});
+      dispatch(fetchUpdateAddressRequest({ id: editingId, name, mobile, email, address }));
     setEditingId(null);
     clearAddressFields();
     setOpenIndex(1);
-    setSelectedAddress(editingId)
+    setSelectedAddress(editingId);
+    }
   };
 
   useEffect(() => {
@@ -207,6 +234,8 @@ const CheckoutPage = () => {
                               value={name}
                               onChange={(e) => setName(e.target.value)}
                             />
+                            {errors.name && <p className="error">{errors.name}</p>}
+
                           </div>
 
                           <div className="address-field">
@@ -216,6 +245,8 @@ const CheckoutPage = () => {
                               value={mobile}
                               onChange={(e) => setMobile(e.target.value)}
                             />
+                            {errors.mobile && <p className="error">{errors.mobile}</p>}
+
                           </div>
                           <div className="address-field">
                             <input
@@ -224,6 +255,8 @@ const CheckoutPage = () => {
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}
                             />
+                            {errors.email && <p className="error">{errors.email}</p>}
+
                           </div>
                         </div>
                         <div className="address-field">
@@ -233,6 +266,8 @@ const CheckoutPage = () => {
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
                           />
+                          {errors.address && <p className="error">{errors.address}</p>}
+
                         </div>
                       </div>
                     </div>
@@ -289,11 +324,11 @@ const CheckoutPage = () => {
 
         <div className="order-summary">
           <h2>Order Summary</h2>
-          <div className="sub-total-field"><span>Sub Total </span><span>{FormatCurrency(totalPrice, "en-IN")}</span></div>
+          <div className="sub-total-field"><span>Sub Total </span><span>₹{FormatCurrency(totalPrice, "en-IN")}</span></div>
           <div className="shipping-field"><span>Shipping </span><span className="shipping-value">Free</span></div>
-          <div className="tax-field"><span>Platform Fee </span><span>{FormatCurrency(platformFee, "en-IN")}</span></div>
-          <div className="total-field"><span>Total </span><span>{FormatCurrency(totalOrderAmount, "en-IN")}</span></div>
-          <button className="continue-btn" disabled={selectedAddress === null} onClick={() => placeOrder()}> Place Order</button>
+          <div className="tax-field"><span>Platform Fee </span><span>₹{FormatCurrency(platformFee, "en-IN")}</span></div>
+          <div className="total-field"><span>Total </span><span>₹{FormatCurrency(totalOrderAmount, "en-IN")}</span></div>
+          <button className="continue-btn place-order-btn" disabled={selectedAddress === null} onClick={() => placeOrder()}> Place Order</button>
         </div>
       </div>
 

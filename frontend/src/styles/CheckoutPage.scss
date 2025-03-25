@@ -7,11 +7,13 @@
   display: flex;
   padding: 20px;
   height: calc(100vh - 70px);
+  justify-content: space-between;
+    flex-wrap: wrap;
 
   .toggle-details {
     display: flex;
     flex-direction: column;
-    width: 75%;
+    width: 70%;
     gap: 10px;
   }
 
@@ -37,7 +39,7 @@
 
   .continue-btn {
     display: flex;
-    width: 100px;
+    width:100px;
     height: 30px;
     color: white;
     align-self: center;
@@ -53,6 +55,12 @@
     }
   }
 
+  .place-order-btn{
+    width:100%;
+    font-size: 18px;
+    height: 40px;
+  }
+
   .shipping-accordion-div {
     display: flex;
     justify-content: center;
@@ -62,6 +70,10 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+    }
+
+    .address-item .address-div{
+      width:70%;
     }
 
     .add-address-h2-link {
@@ -91,6 +103,7 @@
     display: flex;
     flex-direction: column;
     padding: 10px 20px;
+    gap: 10px;
   }
 
   .cart-summary {

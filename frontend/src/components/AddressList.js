@@ -4,6 +4,7 @@ import { fetchAddressRequest, fetchAddAddressRequest, fetchDeleteAddressRequest,
 import "../styles/AddressList.scss";
 import Footer from "./Footer";
 import Breadcrumbs from "../utils/BreadCrumbs";
+import validationForm from "../utils/AddressFormValidation"
 
 const AddressList = () => {
   let { addresses } = useSelector((state) => state.addresses);
@@ -14,12 +15,20 @@ const AddressList = () => {
   const [editingId, setEditingId] = useState(null);
   const dispatch = useDispatch();
 
+  const [errors, setErrors] = useState({});
+
   useEffect(() => {
     dispatch(fetchAddressRequest());
   }, [dispatch]);
 
-  const handleAddAddress = () => {
-    if (address.trim()) {
+
+  const handleAddAddress = (e) => {
+    e.preventDefault();
+    const newErrors = validationForm(name, mobile, email, address);
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+    } else {
+      setErrors({});
       dispatch(fetchAddAddressRequest({ name, mobile, email, address: address }));
       clearAddressFields()
     }
@@ -31,12 +40,24 @@ const AddressList = () => {
     setMobile(details.mobile);
     setEmail(details.email);
     setAddress(details.address);
+    setErrors({});
   };
 
-  const handleUpdate = () => {
-    dispatch(fetchUpdateAddressRequest({ id: editingId, name, mobile, email, address }));
-    setEditingId(null);
-    clearAddressFields()
+  const handleUpdate = (e) => {
+    // dispatch(fetchUpdateAddressRequest({ id: editingId, name, mobile, email, address }));
+    // setEditingId(null);
+    // clearAddressFields()
+
+    e.preventDefault();
+    const newErrors = validationForm(name, mobile, email, address);
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+    } else {
+      setErrors({});
+      dispatch(fetchUpdateAddressRequest({ id: editingId, name, mobile, email, address }));
+      setEditingId(null);
+      clearAddressFields()
+    }
   };
 
   function clearAddressFields() {
@@ -67,8 +88,8 @@ const AddressList = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
+              {errors.name && <p className="error">{errors.name}</p>}
             </div>
-
             <div className="address-field">
               <input
                 type="text"
@@ -76,6 +97,7 @@ const AddressList = () => {
                 value={mobile}
                 onChange={(e) => setMobile(e.target.value)}
               />
+              {errors.mobile && <p className="error">{errors.mobile}</p>}
             </div>
             <div className="address-field">
               <input
@@ -84,6 +106,7 @@ const AddressList = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
+              {errors.email && <p className="error">{errors.email}</p>}
             </div>
           </div>
           <div className="address-field">
@@ -93,6 +116,7 @@ const AddressList = () => {
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
+            {errors.address && <p className="error">{errors.address}</p>}
           </div>
           {editingId ? (
             <button className="add-btn" onClick={handleUpdate}>✅ Update</button>
