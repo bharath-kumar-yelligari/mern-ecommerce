@@ -38,7 +38,9 @@ const ProductDetails = () => {
       <Breadcrumbs products={selectedProduct.title} />
       <div className="product-details">
         <div className="image-block">
-          {selectedImage && <img className="main-image" src={selectedImage} alt="thumbnail" />}
+          <div>
+            {selectedImage && <img className="main-image" src={selectedImage} alt="thumbnail" />}
+          </div>
           <div className="image-gallery">
             {selectedProduct?.images?.length > 0 ? (
               selectedProduct.images.map((img, index) => (
@@ -56,14 +58,14 @@ const ProductDetails = () => {
           </div>
         </div>
         <div className="details-block">
-          <h2 className="title">{selectedProduct.title}</h2>
-          <p className="description">{selectedProduct.description}</p>
+          <h2 className="title">{selectedProduct.description}</h2>
+          <p className="description">{selectedProduct.title}</p>
           <div className="details-rating-div"><p > {selectedProduct.rating}</p> <StarRating colorVal={selectedProduct.rating < 4 ? "orange" : "green"} rating={selectedProduct.rating} /> <p > {selectedProduct.ratingQuantity} Ratings</p> </div>
 
           <h3 className="price">₹{FormatCurrency(selectedProduct.price, "en-IN")}</h3>
           <div className="delivery-details">
-            <div className="delivery-div"><p><FaShippingFast /></p>  <p>Free Delivery</p></div>
-            <div className="returns-div"> <p><FaArrowAltCircleDown /></p>    <p>7 Days Return Policy</p></div>
+            <div className="delivery-div"><p className="icon"><FaShippingFast /></p>  <p>Free Delivery</p></div>
+            <div className="returns-div"> <p className="icon"><FaArrowAltCircleDown /></p>    <p>7 Days Return Policy</p></div>
           </div>
           <button className="btn-large add-cart-btn" onClick={() => addToCart(selectedProduct)}>Add To Cart</button>
         </div>

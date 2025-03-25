@@ -20,7 +20,7 @@
   .main-image {
     min-height: 200px;
     height: calc(70vh - 90px);
-    width: 100%;
+    // width: 100%;
     min-width: 200px;
     cursor: pointer;
   }
@@ -49,6 +49,7 @@
 
   .title {
     display: flex;
+    text-align: left;
   }
 
   .description {
@@ -82,6 +83,13 @@
       align-items: center;
       gap: 5px;
       justify-content: flex-start;
+    }
+
+    .delivery-div,
+    .returns-div {
+      .icon {
+        height: 16px;
+      }
     }
 
     .returns-div {

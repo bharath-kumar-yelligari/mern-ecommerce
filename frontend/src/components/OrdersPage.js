@@ -51,7 +51,8 @@ const OrdersPage = () => {
                     </div>
                     <div className="delivery-main-div">
                       <div className="delivery-div">
-                        <span className="order-symbol" style={{ backgroundColor: (item.deliveryStatus === 'Delivered') ? "green" : "orange" }}></span>
+                        {/* <span className="order-symbol" style={{ backgroundColor: (item.deliveryStatus === 'Delivered') ? "green" : "orange" }}></span> */}
+                        <span className="order-symbol" ></span>
                         <div className="delivery-status">
                           <span>{item.deliveryStatus} on</span> {new Date(item.createdAt).toLocaleDateString("en-IN", {
                             day: "2-digit",

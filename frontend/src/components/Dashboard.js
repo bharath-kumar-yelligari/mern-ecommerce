@@ -12,7 +12,7 @@ import { FormatCurrency } from "../utils/FormatCurrency";
 const Dashboard = () => {
     const dispatch = useDispatch();
     const { filteredProducts, loading, error } = useSelector((state) => state.products);
-    const [sortOption, setSortOption] = useState("low-to-high");
+    const [sortOption, setSortOption] = useState("popular");
 
     const addToCart = (product) => {
         dispatch(fetchAddCartRequest(product));
