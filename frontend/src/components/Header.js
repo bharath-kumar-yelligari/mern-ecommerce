@@ -5,7 +5,7 @@ import { fetchCartProductsRequest } from "../actions/cartActions";
 import { filterProducts } from "../actions/productActions";
 
 import { Link } from "react-router-dom";
-import { FaShoppingCart, FaUser, FaBars, FaTimes } from "react-icons/fa";
+import { FaShoppingCart, FaUser, FaBars, FaTimes, FaSignOutAlt, FaShoppingBag, FaBox, FaAddressBook } from "react-icons/fa";
 import "../styles/Header.scss";
 import { logout } from "../actions/authActions";
 
@@ -87,14 +87,14 @@ const Header = ({ onLogout }) => {
         <ul>
           {/* <li><Link to="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
           <li><Link to="/products" onClick={() => setMenuOpen(false)}>Products</Link></li> */}
-          {user ? (
-            <li><Link to="/cart" onClick={() => setMenuOpen(false)}>
-              <FaShoppingCart className="shop-icon" />
-              {cartLength > 0 && <span className="cart-count">{cartLength}</span>} Cart
-            </Link></li>
-          ) : (
+          {/* {user ? ( */}
+          <li><Link to="/cart" onClick={() => setMenuOpen(false)}>
+            <FaShoppingCart className="shop-icon" />
+            {(cartLength && user) > 0 && <span className="cart-count">{cartLength}</span>} Cart
+          </Link></li>
+          {/* ) : (
             <></>
-          )}
+          )} */}
         </ul>
 
         {/* User Section */}
@@ -106,9 +106,9 @@ const Header = ({ onLogout }) => {
               </button>
               {showDropdown && (
                 <ul className="dropdown-menu">
-                  <li onClick={() => handleNavigation("/address")}>📦 My Addresses</li>
-                  <li onClick={() => handleNavigation("/orders")}>📦 My Orders</li>
-                  <li onClick={handleLogout}>🚪 Logout</li>
+                  <li onClick={() => handleNavigation("/address")}><FaAddressBook /> My Addresses</li>
+                  <li onClick={() => handleNavigation("/orders")}><FaBox /> My Orders</li>
+                  <li onClick={handleLogout}><FaSignOutAlt />  Logout</li>
                 </ul>
               )}
             </div>

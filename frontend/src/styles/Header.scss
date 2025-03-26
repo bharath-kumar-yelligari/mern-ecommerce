@@ -16,6 +16,7 @@
   height: 30px;
   width: 300px;
   padding: 0px 25px;
+  font-size: 1em;
 
   &:focus-visible {
     outline: none;
@@ -155,6 +156,9 @@
 }
 
 .dropdown-menu li {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
   list-style: none;
   padding: 8px;
   cursor: pointer;
@@ -172,12 +176,8 @@
   background: #f0f0f0;
 }
 
-
-
-
-
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .menu-icon {
     display: block;
   }
@@ -207,3 +207,14 @@
     flex-direction: column;
   }
 }
+
+
+
+// media queries for different resolutions
+@media only screen and (min-width: 992px) and (max-width: 1200px) {}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {}
+
+@media only screen and (min-width: 600px) and (max-width: 768px) {}
+
+@media only screen and (max-width: 600px) {}

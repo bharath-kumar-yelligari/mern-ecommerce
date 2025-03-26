@@ -11,12 +11,15 @@ import OrdersPage from "./components/OrdersPage";
 import AddressList from "./components/AddressList";
 import NotFound from "./components/NotFound";
 import CheckoutPage from "./components/CheckoutPage";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
 
   return (
     <Router>
       <Header />
+      <ToastContainer position="top-right" autoClose={3000} />
       <Routes>
         {/* Default Route - Redirect to Home */}
         {/* <Route path="/" element={<ProtectedRoute><Navigate to="/home" /> </ProtectedRoute>} /> */}

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { fetchAddCartRequest } from "../actions/cartActions";
 import { fetchProductDetailsRequest } from "../actions/productActions";
 import "../styles/ProductDetails.scss";
-import { FaShippingFast, FaArrowAltCircleDown } from "react-icons/fa";
+import { FaShippingFast, FaArrowAltCircleDown, FaUndo } from "react-icons/fa";
 import Footer from "./Footer";
 import StarRating from "../utils/StarRating";
 import Breadcrumbs from "../utils/BreadCrumbs";
@@ -65,7 +65,7 @@ const ProductDetails = () => {
           <h3 className="price">₹{FormatCurrency(selectedProduct.price, "en-IN")}</h3>
           <div className="delivery-details">
             <div className="delivery-div"><p className="icon"><FaShippingFast /></p>  <p>Free Delivery</p></div>
-            <div className="returns-div"> <p className="icon"><FaArrowAltCircleDown /></p>    <p>7 Days Return Policy</p></div>
+            <div className="returns-div"> <p className="icon"><FaUndo /></p>    <p>7 Days Return Policy</p></div>
           </div>
           <button className="btn-large add-cart-btn" onClick={() => addToCart(selectedProduct)}>Add To Cart</button>
         </div>

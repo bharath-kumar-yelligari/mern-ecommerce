@@ -8,7 +8,7 @@
   padding: 20px;
   height: calc(100vh - 70px);
   justify-content: space-between;
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 
   .toggle-details {
     display: flex;
@@ -39,7 +39,7 @@
 
   .continue-btn {
     display: flex;
-    width:100px;
+    width: 100px;
     height: 30px;
     color: white;
     align-self: center;
@@ -55,8 +55,8 @@
     }
   }
 
-  .place-order-btn{
-    width:100%;
+  .place-order-btn {
+    width: 100%;
     font-size: 18px;
     height: 40px;
   }
@@ -72,8 +72,17 @@
       gap: 20px;
     }
 
-    .address-item .address-div{
-      width:70%;
+    .address-item {
+      padding: 1%;
+    }
+
+    .radio-div {
+      display: flex;
+      align-items: center;
+    }
+
+    .address-item .address-div {
+      width: 70%;
     }
 
     .add-address-h2-link {
@@ -133,7 +142,7 @@
     .address-item {
       display: flex;
       flex-direction: row;
-      width: 100%;
+      width: 98%;
     }
   }
 
@@ -149,6 +158,7 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+      width: 100%;
 
       .contact-details {
         gap: 10px;

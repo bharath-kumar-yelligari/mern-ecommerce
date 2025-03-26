@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { FormatCurrency } from "../utils/FormatCurrency.js";
 import { fetchAddOrderRequest, fetchOrdersRequest, resetOrderState } from "../actions/ordersActions.js";
 import validationForm from "../utils/AddressFormValidation.js";
+import { toast } from "react-toastify";
 
 const CheckoutPage = () => {
   const [openIndex, setOpenIndex] = useState(0); // Default open first section
@@ -23,7 +24,7 @@ const CheckoutPage = () => {
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [editingId, setEditingId] = useState(null);
-    const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const newAddress = "new";
@@ -81,7 +82,7 @@ const CheckoutPage = () => {
       setErrors(newErrors);
     } else {
       setErrors({});
-        dispatch(fetchAddAddressRequest({ name, mobile, email, address: address }));
+      dispatch(fetchAddAddressRequest({ name, mobile, email, address: address }));
       clearAddressFields();
       setOpenIndex(1);
     }
@@ -102,10 +103,10 @@ const CheckoutPage = () => {
     } else {
       setErrors({});
       dispatch(fetchUpdateAddressRequest({ id: editingId, name, mobile, email, address }));
-    setEditingId(null);
-    clearAddressFields();
-    setOpenIndex(1);
-    setSelectedAddress(editingId);
+      setEditingId(null);
+      clearAddressFields();
+      setOpenIndex(1);
+      setSelectedAddress(editingId);
     }
   };
 
@@ -129,6 +130,15 @@ const CheckoutPage = () => {
     if (success) {
       navigate("/orders"); // ✅ Redirect to Orders page after order is placed
       dispatch(resetOrderState());
+      toast.success("🎉 Order placed successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+      });
     }
   }, [success, navigate]);
 
@@ -156,10 +166,8 @@ const CheckoutPage = () => {
       "shippingDetails": shippingDetails,
       "paymentMode": paymentMode
     }
-
     dispatch(fetchAddOrderRequest(payload))
   }
-
 
   cart = typeof cart === "string" ? JSON.parse(cart) : cart;
   addresses = typeof addresses === "string" ? JSON.parse(addresses) : addresses;
@@ -185,15 +193,17 @@ const CheckoutPage = () => {
                 ) : (
                   <div className="address-page">
                     {addresses.map((item) => (
-
                       <div key={item._id} className="address-item">
-                        <input
-                          type="radio"
-                          name="address"
-                          value={item._id}
-                          checked={selectedAddress === item._id}
-                          onChange={() => handleAddressSelection(item._id)}
-                        />
+                        <div className="radio-div">
+                          <input
+                            type="radio"
+                            name="address"
+                            value={item._id}
+                            checked={selectedAddress === item._id}
+                            onChange={() => handleAddressSelection(item._id)}
+                          />
+                        </div>
+
                         <div className="address-div">
                           <span className="name">{item.name}</span>
                           <span>{item.mobile}</span>
@@ -208,10 +218,8 @@ const CheckoutPage = () => {
                   </div>
                 )}
                 {selectedAddress !== newAddress && <div className="add-address-h2-link"><h2>+</h2> <h2 className="add-address-h2" onClick={() => handleAddressSelection(newAddress)}> Add Address</h2></div>}
-
                 {selectedAddress === newAddress &&
                   <div className="address-add-page">
-
                     {editingId ? (
                       <h2 className="add-new-address-h2" >Edit Address</h2>
                     ) : (
@@ -235,9 +243,7 @@ const CheckoutPage = () => {
                               onChange={(e) => setName(e.target.value)}
                             />
                             {errors.name && <p className="error">{errors.name}</p>}
-
                           </div>
-
                           <div className="address-field">
                             <input
                               type="text"
@@ -246,7 +252,6 @@ const CheckoutPage = () => {
                               onChange={(e) => setMobile(e.target.value)}
                             />
                             {errors.mobile && <p className="error">{errors.mobile}</p>}
-
                           </div>
                           <div className="address-field">
                             <input
@@ -256,7 +261,6 @@ const CheckoutPage = () => {
                               onChange={(e) => setEmail(e.target.value)}
                             />
                             {errors.email && <p className="error">{errors.email}</p>}
-
                           </div>
                         </div>
                         <div className="address-field">
@@ -267,7 +271,6 @@ const CheckoutPage = () => {
                             onChange={(e) => setAddress(e.target.value)}
                           />
                           {errors.address && <p className="error">{errors.address}</p>}
-
                         </div>
                       </div>
                     </div>
