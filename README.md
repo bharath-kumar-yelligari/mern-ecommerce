@@ -22,6 +22,9 @@
 - **Security Management:**
   - Login, Token Authentication and Signout.
 
+- **Product images:**
+  - The images for each product were uploaded in cloudinary and the URLs will be stored in DB
+
 
 # **Project Setup**
 
@@ -33,13 +36,13 @@
 ### Clone the project
 
 ```bash
-  git clone https://github.com/bharathyelligari/Assessment-final.git
+  git clone https://github.com/bharathyelligari/assessment-final.git
 ```
 
 ### Navigate to the project directory
 
 ```bash
-  cd Assessment-final
+  cd assessment-final
 ```
 
 ### Install dependencies for frontend and backend separately

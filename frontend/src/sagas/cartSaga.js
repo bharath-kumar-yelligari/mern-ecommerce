@@ -11,7 +11,6 @@ import {
 } from "../actions/cartActions";
 
 const fetchCartProductsApi = async () => {
-  console.log(process.env.REACT_APP_BASE_URL)
   const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/cart`); // Replace with your API
   return response.data;
 };

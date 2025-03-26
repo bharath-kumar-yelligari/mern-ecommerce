@@ -8,9 +8,7 @@ import { fetchAddressSuccess, fetchAddressFailure, fetchAddAddressSuccess ,fetch
   FETCH_UPDATE_ADDRESS_REQUEST
 } from "../actions/addressListActions";
 
-
 const fetchAddressApi = async () => {
-  console.log(process.env.REACT_APP_BASE_URL)
   const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/address`); 
   return response.data;
 };

@@ -8,7 +8,7 @@ const users = require("../dev-data/users.json");
 const seedData = async () => {
   try {
     await connectToDB();
-    console.log('Seed [started] please wait..');
+    console.log('Seed started please wait..');
     await seedProducts();
     await seedUsers();
     console.log('Seed completed..');

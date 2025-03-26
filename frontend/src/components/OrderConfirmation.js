@@ -12,7 +12,6 @@ const OrderConfirmation = () => {
   let { latestOrder } = useSelector((state) => state.orders);
 
   useEffect(() => {
-    console.log("into order confirmation")
     if (latestOrder.length === 0) {
       navigate("/"); // Redirect to homepage if no order found
     }
