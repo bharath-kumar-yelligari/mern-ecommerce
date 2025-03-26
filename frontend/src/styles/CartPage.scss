@@ -94,3 +94,47 @@
     display: flex;
     justify-content: end;
 }
+
+// media queries for different resolutions
+@media only screen and (min-width: 992px) and (max-width: 1200px) {}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .cart-item {
+        flex-wrap: wrap;
+        height: auto;
+    }
+
+    .checkout-button {
+        font-size: 1.3em;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+    .cart-item {
+        flex-wrap: wrap;
+        height: auto;
+
+        .image-details {
+            flex-wrap: wrap;
+        }
+    }
+
+    .checkout-button {
+        font-size: 1.1em;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .cart-item {
+        flex-wrap: wrap;
+        height: auto;
+
+        .image-details {
+            flex-wrap: wrap;
+        }
+    }
+
+    .checkout-button {
+        font-size: 1em;
+    }
+}

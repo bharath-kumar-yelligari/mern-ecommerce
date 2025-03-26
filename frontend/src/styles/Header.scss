@@ -26,7 +26,7 @@
 /* Logo */
 .logo a {
   color: white;
-  font-size: 24px;
+  font-size: 1.5em;
   text-decoration: none;
   font-weight: bold;
 }
@@ -54,7 +54,7 @@
 .nav-menu ul li a {
   text-decoration: none;
   color: white;
-  font-size: 18px;
+  font-size: 1.1em;
   display: flex;
   transition: 0.3s;
   column-gap: 5px;
@@ -138,7 +138,7 @@
 .profile-dropdown button {
   background: none;
   border: none;
-  font-size: 16px;
+  font-size: 1em;
   cursor: pointer;
 }
 
@@ -163,6 +163,7 @@
   padding: 8px;
   cursor: pointer;
   color: #333;
+  font-size: 1em;
 
   a {
     color: #333 !important;
@@ -196,6 +197,9 @@
 
   .nav-menu.active {
     display: flex;
+    gap: 20px;
+    align-items: baseline;
+    padding-left: 15px;
   }
 
   .nav-menu ul {
@@ -209,12 +213,103 @@
 }
 
 
-
 // media queries for different resolutions
-@media only screen and (min-width: 992px) and (max-width: 1200px) {}
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
 
-@media only screen and (min-width: 768px) and (max-width: 992px) {}
+  .search-text,
+  .profile-dropdown button,
+  .dropdown-menu li {
+    font-size: 1em;
+  }
 
-@media only screen and (min-width: 600px) and (max-width: 768px) {}
+  .logo a {
+    font-size: 1.5em;
+  }
 
-@media only screen and (max-width: 600px) {}
+  .user-icon,
+  .shop-icon {
+    height: 1.3em;
+    width: 1.3em;
+  }
+
+  .nav-menu ul li a {
+    font-size: 1.1em;
+  }
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+
+  .search-text,
+  .profile-dropdown button,
+  .dropdown-menu li {
+    font-size: 0.8em;
+  }
+
+  .logo a {
+    font-size: 1.3em;
+  }
+
+  .user-icon,
+  .shop-icon {
+    height: 1.1em;
+    width: 1.1em;
+  }
+
+  .nav-menu ul li a {
+    font-size: 0.9em;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+
+  .search-text,
+  .profile-dropdown button,
+  .dropdown-menu li {
+    font-size: 0.6em;
+  }
+
+  .logo a {
+    font-size: 1.1em;
+  }
+
+  .user-icon,
+  .shop-icon {
+    height: 0.9em;
+    width: 0.9em;
+  }
+
+  .nav-menu ul li a {
+    font-size: 0.7em;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+
+  .search-text,
+  .profile-dropdown button,
+  .dropdown-menu li {
+    font-size: 1em;
+  }
+
+  .profile-dropdown button {
+    padding-left: 0px;
+  }
+
+  .cart-count {
+    top: 62px;
+  }
+
+  // .logo a {
+  //   font-size: 1em;
+  // }
+
+  // .user-icon , .shop-icon {
+  //   height: 0.8em;
+  //   width: 0.8em;
+  // }
+
+  .nav-menu ul li a {
+    font-size: 1em;
+  }
+}

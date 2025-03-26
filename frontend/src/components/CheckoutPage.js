@@ -332,7 +332,7 @@ const CheckoutPage = () => {
         </div>
 
         <div className="order-summary">
-          <h2>Order Summary</h2>
+          <h2 className="order-label">Order Summary</h2>
           <div className="sub-total-field"><span>Sub Total </span><span>₹{FormatCurrency(totalPrice, "en-IN")}</span></div>
           <div className="shipping-field"><span>Shipping </span><span className="shipping-value">Free</span></div>
           <div className="tax-field"><span>Platform Fee </span><span>₹{FormatCurrency(platformFee, "en-IN")}</span></div>
