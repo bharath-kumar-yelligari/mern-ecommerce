@@ -35,7 +35,7 @@ const OrdersPage = () => {
             <h2 className="your-delivery">Your Orders</h2>
             {orders.map((item) => (
               <div key={item._id} className="delivery-item">
-
+                <div className="orderID-div"><span className="order-label">Order Id: </span><span className="order-id">{item.orderID}</span></div>
                 {item.items.map((product) => (
                   <div key={product._id} className="items-page">
                     <div className="image-details">

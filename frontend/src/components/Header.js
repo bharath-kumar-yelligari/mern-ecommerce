@@ -5,7 +5,7 @@ import { fetchCartProductsRequest } from "../actions/cartActions";
 import { filterProducts } from "../actions/productActions";
 
 import { Link } from "react-router-dom";
-import { FaShoppingCart, FaUser, FaBars, FaTimes, FaSignOutAlt, FaShoppingBag, FaBox, FaAddressBook } from "react-icons/fa";
+import { FaShoppingCart, FaUser, FaBars, FaTimes, FaSignOutAlt, FaShoppingBag, FaBox, FaAddressBook, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import "../styles/Header.scss";
 import { logout } from "../actions/authActions";
 
@@ -102,7 +102,7 @@ const Header = ({ onLogout }) => {
           {user ? (
             <div className="profile-dropdown" ref={dropdownRef}>
               <button className="dropdown-btn" onClick={() => setShowDropdown(!showDropdown)}>
-                <FaUser className="user-icon" />Hey  {user} ▼
+                <FaUser className="user-icon" />Hey  {user}{showDropdown ? <FaChevronUp /> : <FaChevronDown />}
               </button>
               {showDropdown && (
                 <ul className="dropdown-menu">

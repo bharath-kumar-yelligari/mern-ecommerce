@@ -25,6 +25,7 @@ const CheckoutPage = () => {
   const [address, setAddress] = useState("");
   const [editingId, setEditingId] = useState(null);
   const [errors, setErrors] = useState({});
+  const [orderPlaced, setOrderPlaced] = useState(false)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const newAddress = "new";
@@ -121,7 +122,7 @@ const CheckoutPage = () => {
   }, [addresses])
 
   useEffect(() => {
-    if (cart.length === 0) {
+    if (cart.length === 0 && !orderPlaced) {
       navigate("/cart"); // ✅ Redirect to cart when we remove all items from checkout cart
     }
   }, [cart])
@@ -132,7 +133,7 @@ const CheckoutPage = () => {
 
   useEffect(() => {
     if (success) {
-      navigate("/orders"); // ✅ Redirect to Orders page after order is placed
+      navigate("/orders/order-confirmation"); // ✅ Redirect to Order Confirmation page after order is placed
       dispatch(resetOrderState());
       toast.success("🎉 Order placed successfully!", {
         position: "top-right",
@@ -162,6 +163,7 @@ const CheckoutPage = () => {
   }
 
   const placeOrder = () => {
+    setOrderPlaced(true);
     let shippingDetails = addresses.filter((el) => el._id === selectedAddress)
     let paymentMode = paymentOptions.filter((el) => el.id === paymentOption)[0].type
     let payload = {

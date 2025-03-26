@@ -5,6 +5,7 @@ const ordersSchema = new mongoose.Schema({
     deliveryStatus: String,
     shippingDetails: Array,
     paymentMode: String,
+    orderID: String,
     createdAt: { type: Date, default: Date.now }
 });
 

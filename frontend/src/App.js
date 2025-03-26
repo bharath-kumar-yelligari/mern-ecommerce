@@ -13,6 +13,7 @@ import NotFound from "./components/NotFound";
 import CheckoutPage from "./components/CheckoutPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import OrderConfirmation from "./components/OrderConfirmation";
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
         <Route path="/cart/checkout" element={<ProtectedRoute><CheckoutPage /></ProtectedRoute>} />
 
         <Route path="/orders" element={<ProtectedRoute><OrdersPage /></ProtectedRoute>} />
+        <Route path="/orders/order-confirmation" element={<ProtectedRoute><OrderConfirmation /></ProtectedRoute>} />
         <Route path="/address" element={<ProtectedRoute><AddressList /></ProtectedRoute>} />
 
         {/* 404 Page - Handles unmatched routes */}

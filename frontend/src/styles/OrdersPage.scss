@@ -32,6 +32,19 @@
     box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
     border-radius: 5px;
 
+    .orderID-div {
+        display: flex;
+        gap: 10px;
+
+        .order-id {
+            display: flex;
+        }
+
+        .order-id {
+            color: gray;
+        }
+    }
+
     .image-details {
         display: flex;
         column-gap: 20px;
@@ -49,7 +62,7 @@
         margin: 0px 20px;
     }
 
-    &:hover{
+    &:hover {
         box-shadow: 0 3px 16px 0 rgba(0, 0, 0, .11);
     }
 }
@@ -103,4 +116,26 @@
     .brand {
         color: rgba(0, 0, 0, 0.6)
     }
+}
+
+
+.order-confirmation {
+    text-align: center;
+    padding: 40px;
+}
+
+.order-confirmation h1 {
+    color: #27ae60;
+}
+
+.order-confirmation button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.order-confirmation button:hover {
+    background-color: #0056b3;
 }
