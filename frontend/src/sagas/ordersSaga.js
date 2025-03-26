@@ -2,14 +2,15 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 import { fetchOrdersSuccess, fetchOrdersFailure, fetchAddOrderSuccess, fetchAddOrderFailure, FETCH_ADD_ORDER_REQUEST, FETCH_ORDERS_REQUEST } from "../actions/ordersActions";
 import { fetchClearCartRequest } from "../actions/cartActions";
+import api from "../auth/axiosInstance";
 
 const fetchOrdersApi = async () => {
-  const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/orders`); // Replace with your API
+  const response = await api.get(`/orders`); // Replace with your API
   return response.data;
 };
 
 const fetchAddOrdersApi = async (payload) => {
-  const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/orders`, payload); // Replace with your API
+  const response = await api.post(`/orders`, payload); // Replace with your API
   return response.data;
 };
 

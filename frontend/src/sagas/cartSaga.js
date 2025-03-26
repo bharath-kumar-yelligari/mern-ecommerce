@@ -9,11 +9,27 @@ import {
   FETCH_ADD_CART_REQUEST,
   FETCH_CART_PRODUCTS_REQUEST
 } from "../actions/cartActions";
+import api from "../auth/axiosInstance";
 
 const fetchCartProductsApi = async () => {
-  const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/cart`); // Replace with your API
+  const response = await api.get(`/cart`); // Replace with your API
   return response.data;
 };
+
+const fetchAddCartProductsApi = async (product) => {
+  const response = await api.post(`/cart/addOrUpdate`, product.payload); // Replace with your API
+  return response.data;
+};
+
+const fetchRemoveCartProductsApi = async (id) => {
+  const response = await api.delete(`/cart/delete/` + id.payload); // Replace with your API
+  return response.data;
+};
+
+const fetchClearCartApi = async () => {
+  const response = await api.delete(`/cart/clear`); // Replace with your API
+  return response.data;
+}
 
 function* fetchCartProducts() {
   try {
@@ -24,13 +40,6 @@ function* fetchCartProducts() {
   }
 }
 
-
-const fetchAddCartProductsApi = async (product) => {
-  const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/cart/addOrUpdate`, product.payload); // Replace with your API
-  return response.data;
-};
-
-
 function* fetchAddCartProducts(product) {
   try {
     const data = yield call(fetchAddCartProductsApi, product);
@@ -39,11 +48,6 @@ function* fetchAddCartProducts(product) {
     yield put(fetchAddCartRequestFailure(error.message || "Failed to load cart"));
   }
 }
-
-const fetchRemoveCartProductsApi = async (id) => {
-  const response = await axios.delete(`${process.env.REACT_APP_BASE_URL}/cart/delete/` + id.payload); // Replace with your API
-  return response.data;
-};
 
 function* fetchRemoveCartProducts(id) {
   try {
@@ -54,11 +58,6 @@ function* fetchRemoveCartProducts(id) {
   }
 }
 
-const fetchClearCartApi = async () => {
-  const response = await axios.delete(`${process.env.REACT_APP_BASE_URL}/cart/clear`); // Replace with your API
-  return response.data;
-}
-
 function* fetchClearCart() {
   try {
     const data = yield call(fetchClearCartApi);
@@ -67,7 +66,6 @@ function* fetchClearCart() {
     yield put(fetchClearCartRequestFailure(error.message || "Failed to load cart"));
   }
 }
-
 
 export function* watchCartProducts() {
   yield takeLatest(FETCH_CART_PRODUCTS_REQUEST, fetchCartProducts);
