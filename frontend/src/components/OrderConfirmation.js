@@ -13,7 +13,7 @@ const OrderConfirmation = () => {
 
   useEffect(() => {
     console.log("into order confirmation")
-    if (!latestOrder) {
+    if (latestOrder.length === 0) {
       navigate("/"); // Redirect to homepage if no order found
     }
 

@@ -23,7 +23,6 @@
   - Login, Token Authentication and Signout.
 
 
-
 # **Project Setup**
 
 ### Prerequisites
@@ -49,34 +48,33 @@
 Install frontend dependencies:
 ```bash
 cd frontend
-npm install or npm install --legacy-peer-deps based on your setup
+npm install or npm install --legacy-peer-deps 
 ```
 
 Install backend dependencies:
 ```bash
 cd backend
-npm install or npm install --legacy-peer-deps based on your setup
+npm install or npm install --legacy-peer-deps
 ```
 
 ### Environment Variables
 
 **Backend**
-- Create a `config.env` file in the `backend/config` directory.
+- Create a `.env` file in the `backend` directory.
 - Add the following variables with appropriate values
 ```bash
 
-##Database connection details
+##Database connection details ::
 
-  #If you are using local mongo setup you can update DATABASE_LOCAL with your connection string
-  DATABASE_LOCAL=mongodb://localhost:27017/your-database-name
+#If you are using local mongo setup you can update DATABASE_LOCAL with your connection string
+DATABASE_LOCAL=mongodb://localhost:27017/your-database-name
 
-  #If you are using Atlas cloud account you can update DATABASE with your connection string and update the details of Database name, username and password
-  DATABASE=mongodb+srv://database-username:<PASSWORD>@cluster0.wku0a.mongodb.net/your-database-name
-  DATABASE_PASSWORD=database-password
-
+#If you are using Atlas cloud account you can update DATABASE with your connection string and update the details of Database name, username and password
+DATABASE=mongodb+srv://your-database-username:<PASSWORD>@cluster0.wku0a.mongodb.net/your-database-name
+DATABASE_PASSWORD=your-database-password
 
 # Frontend URL (adjust if needed)
-PORT=4000
+PORT=8000
 
 # Secret key for jwt security
 SECRET_KEY="your-secret-key"
@@ -86,7 +84,7 @@ SECRET_KEY="your-secret-key"
 - Add the following variable:
 ```bash
 # Backend URL (adjust if needed)
-REACT_APP_BASE_URL="http://localhost:4000/api" 
+REACT_APP_BASE_URL="http://localhost:8000/api" 
 ```
 
 **Important**
@@ -94,12 +92,13 @@ REACT_APP_BASE_URL="http://localhost:4000/api"
 - Exclude the `.env` file from version control to protect sensitive information.
 
 ### Data seeding
-- **Get started quickly with pre-populated data**: Populate your database with sample users, products, reviews, and carts, enabling you to test functionalities without manual data entry.
+- **Get started quickly with pre-populated data**: Populate your database with a sample user and products enabling you to test functionalities without manual data entry.
+This will insert an user to login and products to work with 
 
 **Steps**:
 - Open a new terminal window.
 - Navigate to the `backend` directory: `cd backend`
-- Run the seeding script: `npm run seed` ( This script executes the `seed.js` file within the `seed` subdirectory equivalent to running `node seed/seed.js` )
+- Run the seeding script: `npm run seed` ( This script executes the `seed.js` file within the `dev-data` subdirectory equivalent to running `node dev-data/seed.js` )
 ### Running Development Servers
 
 **Important:**
@@ -117,31 +116,22 @@ REACT_APP_BASE_URL="http://localhost:4000/api"
 - Start the server: `npm start`
 - You should see a message indicating the server is running, usually on port 3000.
 
-### Login with demo account (Optional)
-- After successfully seeding the database, you can now explore the application's functionalities using pre-populated sample data.
+### Login with demo account 
+- After successfully seeding the database, you can now explore the application's functionalities using pre-populated Products.
 - here are the `login credentials`
 ```bash
-  email: demo@gmail.com
-  pass: helloWorld@123
+  email: test@gmail.com
+  pass: test@123
 ```
 
 - **Please Note**: While the demo account provides a convenient way to explore many features, it has some limitations:
-    - **Password Reset and OTP Verification**: Due to security reasons, the demo account uses a non-real email address. Therefore, password reset and OTP verification functionalities are not available for this account.
+    - **Register User**: There is no facility to register an user from the screen and the cart and orders were not user specific.
 
-    **What this means**:
-    - You cannot request a password reset or receive verification codes on the demo email address.
-    - To test password reset and OTP verification flows, you need to create a genuine account with a valid email address.
-
-    **What to do?**
-    - If you're primarily interested in exploring other functionalities like wishlist, cart, and order history, the demo account is sufficient.
-    - To test password reset and OTP verification, create a personal account with a valid email address.
+    **Payment service**: Currently there is no payment serive integrated to test
+    
 ### Accessing the Application
 Once both servers are running, you can access them at the following URL's:
 - Backend: http://localhost:8000
 - Frontend: http://localhost:3000
 
-## **Bonus**
-Don't forget to star the repository and share your feedback!✨
 
-## Authors
-- [@RishiBakshii](https://github.com/RishiBakshii)

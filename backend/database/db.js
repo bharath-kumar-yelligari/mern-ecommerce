@@ -1,5 +1,5 @@
 const dotenv = require('dotenv');
-dotenv.config({ path: './config/config.env' });
+dotenv.config({ path: '.env' });
 const mongoose = require('mongoose');
 
 const password = encodeURIComponent(process.env.DATABASE_PASSWORD);
