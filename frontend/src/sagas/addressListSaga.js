@@ -1,26 +1,32 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 import { fetchAddressSuccess, fetchAddressFailure, fetchAddAddressSuccess ,fetchAddAddressFailure,
-  fetchUpdateAddressSuccess, fetchUpdateAddressFailure, fetchDeleteAddressSuccess, fetchDeleteAddressFailure
+  fetchUpdateAddressSuccess, fetchUpdateAddressFailure, fetchDeleteAddressSuccess, fetchDeleteAddressFailure,
+  FETCH_ADDRESS_REQUEST,
+  FETCH_ADD_ADDRESS_REQUEST,
+  FETCH_DELETE_ADDRESS_REQUEST,
+  FETCH_UPDATE_ADDRESS_REQUEST
 } from "../actions/addressListActions";
 
+
 const fetchAddressApi = async () => {
-  const response = await axios.get("http://localhost:4000/api/address"); 
+  console.log(process.env.REACT_APP_BASE_URL)
+  const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/address`); 
   return response.data;
 };
 
 const fetchAddAddressApi = async (address) => {
-  const response = await axios.post("http://localhost:4000/api/address" , address.payload); 
+  const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/address` , address.payload); 
   return response.data;
 };
 
 const fetchUpdateAddressApi = async (address) => {
-  const response = await axios.put("http://localhost:4000/api/address/update/"+ address.payload.id , address.payload); 
+  const response = await axios.put(`${process.env.REACT_APP_BASE_URL}/address/update/`+ address.payload.id , address.payload); 
   return response.data;
 };
 
 const fetchDeleteAddressApi = async (address) => {
-  const response = await axios.delete("http://localhost:4000/api/address/delete/" + address.payload); 
+  const response = await axios.delete(`${process.env.REACT_APP_BASE_URL}/address/delete/` + address.payload); 
   return response.data;
 };
 
@@ -61,8 +67,8 @@ function* fetchDeleteAddress(address) {
 }
 
 export function* watchAddress() {
-  yield takeLatest("FETCH_ADDRESS_REQUEST", fetchAddress);
-  yield takeLatest("FETCH_ADD_ADDRESS_REQUEST", fetchAddAddress);
-  yield takeLatest("FETCH_UPDATE_ADDRESS_REQUEST", fetchUpdateAddress);
-  yield takeLatest("FETCH_DELETE_ADDRESS_REQUEST", fetchDeleteAddress);
+  yield takeLatest(FETCH_ADDRESS_REQUEST, fetchAddress);
+  yield takeLatest(FETCH_ADD_ADDRESS_REQUEST, fetchAddAddress);
+  yield takeLatest(FETCH_UPDATE_ADDRESS_REQUEST, fetchUpdateAddress);
+  yield takeLatest(FETCH_DELETE_ADDRESS_REQUEST, fetchDeleteAddress);
 }

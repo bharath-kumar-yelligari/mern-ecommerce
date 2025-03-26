@@ -1,12 +1,11 @@
 import { takeLatest, call, put } from "redux-saga/effects";
 import axios from "axios";
-import { loginSuccess, loginFailure } from "../actions/authActions";
+import { loginSuccess, loginFailure, LOGIN_REQUEST } from "../actions/authActions";
 import { fetchProductsRequest } from "../actions/productActions";
 
 const loginUserAPI = async (action) => {
     const { email, password } = action.payload;
-    const response = await axios.post("http://localhost:4000/api/users/login" , { email, password }); 
-    //const response = yield call(axios.post, "http://localhost:4000/api/users/login", { email, password });
+    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/login` , { email, password }); 
     return response.data;
 }
 
@@ -24,5 +23,5 @@ function* loginUser(action) {
 }
 
 export function* watchAuth() {
-    yield takeLatest("LOGIN_REQUEST", loginUser);
+    yield takeLatest(LOGIN_REQUEST, loginUser);
 }

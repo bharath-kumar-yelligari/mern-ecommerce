@@ -3,11 +3,16 @@ import axios from "axios";
 import {
   fetchCartProductsSuccess, fetchCartProductsFailure, fetchAddCartRequestSuccess,
   fetchAddCartRequestFailure, fetchRemoveCartRequestSuccess, fetchRemoveCartRequestFailure,
-  fetchClearCartRequestSuccess, fetchClearCartRequestFailure
+  fetchClearCartRequestSuccess, fetchClearCartRequestFailure,
+  FETCH_CLEAR_CART_REQUEST,
+  FETCH_REMOVE_CART_REQUEST,
+  FETCH_ADD_CART_REQUEST,
+  FETCH_CART_PRODUCTS_REQUEST
 } from "../actions/cartActions";
 
 const fetchCartProductsApi = async () => {
-  const response = await axios.get("http://localhost:4000/api/cart"); // Replace with your API
+  console.log(process.env.REACT_APP_BASE_URL)
+  const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/cart`); // Replace with your API
   return response.data;
 };
 
@@ -22,7 +27,7 @@ function* fetchCartProducts() {
 
 
 const fetchAddCartProductsApi = async (product) => {
-  const response = await axios.post("http://localhost:4000/api/cart/addOrUpdate", product.payload); // Replace with your API
+  const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/cart/addOrUpdate`, product.payload); // Replace with your API
   return response.data;
 };
 
@@ -37,7 +42,7 @@ function* fetchAddCartProducts(product) {
 }
 
 const fetchRemoveCartProductsApi = async (id) => {
-  const response = await axios.delete("http://localhost:4000/api/cart/delete/" + id.payload); // Replace with your API
+  const response = await axios.delete(`${process.env.REACT_APP_BASE_URL}/cart/delete/` + id.payload); // Replace with your API
   return response.data;
 };
 
@@ -51,7 +56,7 @@ function* fetchRemoveCartProducts(id) {
 }
 
 const fetchClearCartApi = async () => {
-  const response = await axios.delete("http://localhost:4000/api/cart/clear"); // Replace with your API
+  const response = await axios.delete(`${process.env.REACT_APP_BASE_URL}/cart/clear`); // Replace with your API
   return response.data;
 }
 
@@ -66,9 +71,9 @@ function* fetchClearCart() {
 
 
 export function* watchCartProducts() {
-  yield takeLatest("FETCH_CART_PRODUCTS_REQUEST", fetchCartProducts);
-  yield takeLatest("FETCH_ADD_CART_REQUEST", fetchAddCartProducts);
-  yield takeLatest("FETCH_REMOVE_CART_REQUEST", fetchRemoveCartProducts);
-  yield takeLatest("FETCH_CLEAR_CART_REQUEST", fetchClearCart);
+  yield takeLatest(FETCH_CART_PRODUCTS_REQUEST, fetchCartProducts);
+  yield takeLatest(FETCH_ADD_CART_REQUEST, fetchAddCartProducts);
+  yield takeLatest(FETCH_REMOVE_CART_REQUEST, fetchRemoveCartProducts);
+  yield takeLatest(FETCH_CLEAR_CART_REQUEST, fetchClearCart);
 
 }

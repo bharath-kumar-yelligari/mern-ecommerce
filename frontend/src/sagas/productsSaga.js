@@ -1,15 +1,15 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
-import { fetchProductsSuccess, fetchProductsFailure, fetchProductDetailsSuccess, fetchProductDetailsFailure } from "../actions/productActions";
+import { fetchProductsSuccess, fetchProductsFailure, fetchProductDetailsSuccess, fetchProductDetailsFailure, FETCH_PRODUCT_DETAILS_REQUEST, FETCH_PRODUCTS_REQUEST } from "../actions/productActions";
 
 const fetchProductsApi = async (payload) => {
   const { sort, order } = payload.payload;
-  const response = await axios.get(`http://localhost:4000/api/products?sort=${sort}&order=${order}`); // Replace with your API
+  const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/products?sort=${sort}&order=${order}`); // Replace with your API
   return response.data;
 };
 
 const fetchProductDetailsApi = async (id) => {
-  const response = await axios.get("http://localhost:4000/api/products/" + id.payload); // Replace with your API
+  const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/products/` + id.payload); // Replace with your API
   return response.data;
 };
 
@@ -34,6 +34,6 @@ function* fetchProductDetails(id) {
 }
 
 export function* watchFetchProducts() {
-  yield takeLatest("FETCH_PRODUCTS_REQUEST", fetchProducts);
-  yield takeLatest("FETCH_PRODUCT_DETAILS_REQUEST", fetchProductDetails);
+  yield takeLatest(FETCH_PRODUCTS_REQUEST, fetchProducts);
+  yield takeLatest(FETCH_PRODUCT_DETAILS_REQUEST, fetchProductDetails);
 }
