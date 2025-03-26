@@ -51,6 +51,10 @@ const CheckoutPage = () => {
   // }, [dispatch]);
 
   const toggleAccordion = (index) => {
+
+    if (selectedAddress === newAddress) {
+      return;
+    }
     if (index === 1 || index === 2) {
       if (!selectedAddress) {
         return;
@@ -295,7 +299,7 @@ const CheckoutPage = () => {
           >
             <div className="cart-summary">
               <CartItems cart={cart} />
-              <button className="continue-btn" disabled={selectedAddress === null} onClick={() => setOpenIndex(2)}> Continue</button>
+              <button className="continue-btn" disabled={selectedAddress === null || addresses.length === 0} onClick={() => setOpenIndex(2)}> Continue</button>
             </div>
 
           </Accordion>
@@ -319,7 +323,7 @@ const CheckoutPage = () => {
                   </div>
                 </div>
               ))}
-              <button className="continue-btn" disabled={selectedAddress === null} onClick={() => setOpenIndex(-1)}> Continue</button>
+              <button className="continue-btn" disabled={selectedAddress === null || addresses.length === 0} onClick={() => setOpenIndex(-1)}> Continue</button>
 
             </div>
           </Accordion>
@@ -331,7 +335,7 @@ const CheckoutPage = () => {
           <div className="shipping-field"><span>Shipping </span><span className="shipping-value">Free</span></div>
           <div className="tax-field"><span>Platform Fee </span><span>₹{FormatCurrency(platformFee, "en-IN")}</span></div>
           <div className="total-field"><span>Total </span><span>₹{FormatCurrency(totalOrderAmount, "en-IN")}</span></div>
-          <button className="continue-btn place-order-btn" disabled={selectedAddress === null} onClick={() => placeOrder()}> Place Order</button>
+          <button className="continue-btn place-order-btn" disabled={selectedAddress === null || addresses.length === 0 || selectedAddress === newAddress} onClick={() => placeOrder()}> Place Order</button>
         </div>
       </div>
 
