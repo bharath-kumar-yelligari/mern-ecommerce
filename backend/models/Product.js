@@ -13,7 +13,6 @@ const productSchema = new mongoose.Schema({
     isDeleted: Boolean,
     rating:Number,
     ratingQuantity:Number,
-    updatedAt: String
 });
 
 const Product = mongoose.model('Product', productSchema);

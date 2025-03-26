@@ -16,7 +16,7 @@ const CartPage = () => {
   const navigate = useNavigate();
 
   const checkoutNavigate = () => {
-    if (!loading && addresses.length > 0) {
+    if (!loading) {
       navigate("/cart/checkout") // Navigate only when data is ready
     }
   }

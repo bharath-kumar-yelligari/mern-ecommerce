@@ -90,7 +90,7 @@ const Header = ({ onLogout }) => {
           {/* {user ? ( */}
           <li><Link to="/cart" onClick={() => setMenuOpen(false)}>
             <FaShoppingCart className="shop-icon" />
-            {(cartLength && user) > 0 && <span className="cart-count">{cartLength}</span>} Cart
+            {(cartLength > 0 && user) && <span className="cart-count">{cartLength}</span>} Cart
           </Link></li>
           {/* ) : (
             <></>

@@ -1,0 +1,162 @@
+[
+  {
+    "title": "Samsung S25 Ultra",
+    "description": "SAMSUNG Galaxy S25 Ultra 5G (Titanium Silverblue, 512 GB)  (12 GB RAM)",
+    "price": 78000,
+    "discountPercentage": 15.46,
+    "stockQuantity": 36,
+    "brand": "Samsung",
+    "category": "65a7e24602e12c44f599442c",
+    "thumbnail": "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468568/Samsung_s25_thumbnail.jpg",
+    "images": [
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468568/Samsung_s25_thumbnail.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468623/Samsung_s25_1.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468628/Samsung_s25_2.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468634/Samsung_s25_3.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468640/Samsung_s25_4.jpg"
+    ],
+    "isDeleted": false,
+    "rating": 4.7,
+    "ratingQuantity": 368
+  },
+  {
+    "title": "MacBook Pro",
+    "description": "Apple MacBook Pro Apple M3 - (8 GB/512 GB SSD/macOS Sonoma) MTL73HN/A  (14 Inch, Space Grey, 1.55 Kg)",
+    "price": 90999,
+    "discountPercentage": 11.02,
+    "stockQuantity": 83,
+    "brand": "Apple",
+    "category": "65a7e24602e12c44f599442d",
+    "thumbnail": "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468754/MacBook_pro_thumbnail.jpg",
+    "images": [
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468754/MacBook_pro_thumbnail.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468759/MacBook_pro_1.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468763/MacBook_pro_2.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468768/MacBook_pro_3.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468774/MacBook_pro_4.jpg"
+    ],
+    "isDeleted": false,
+    "rating": 4.8,
+    "ratingQuantity": 836
+  },
+  {
+    "title": "IPhone 15",
+    "description": "Apple 15 (Blue, 128 GB)",
+    "price": 55500,
+    "discountPercentage": 12.96,
+    "stockQuantity": 14,
+    "brand": "Apple",
+    "category": "65a7e24602e12c44f599442c",
+    "thumbnail": "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468731/Iphone14_Thumbnail.jpg",
+    "images": [
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468731/Iphone14_Thumbnail.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468736/iPhone_14_1.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468740/I_phone_14_2.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468744/I_phone_14_3.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468748/I_phone_14_4.jpg"
+    ],
+    "isDeleted": false,
+    "rating": 4.6,
+    "ratingQuantity": 498
+  },
+  {
+    "title": "OPPO F27",
+    "description": "OPPO F27 5G (Aber Orange, 128 GB)  (8 GB RAM)",
+    "price": 22998,
+    "discountPercentage": 17.91,
+    "stockQuantity": 123,
+    "brand": "Oppo",
+    "category": "65a7e24602e12c44f599442c",
+    "thumbnail": "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468701/Oppo_F27_thumbnail.jpg",
+    "images": [
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468701/Oppo_F27_thumbnail.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468707/Oppo_F27_1.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468710/Oppo_F27_2.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468718/Oppo_F27_3.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468722/Oppo_F27_4.jpg"
+    ],
+    "isDeleted": false,
+    "rating": 4.3,
+    "ratingQuantity": 211
+  },
+  {
+    "title": "Redmi 13",
+    "description": "REDMI 13 5G (Black Diamond, 128 GB)  (8 GB RAM)",
+    "price": 15999,
+    "discountPercentage": 10.58,
+    "stockQuantity": 32,
+    "brand": "Redmi",
+    "category": "65a7e24602e12c44f599442c",
+    "thumbnail": "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468663/Redmi_13_thumbnail.jpg",
+    "images": [
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468663/Redmi_13_thumbnail.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468669/Redmi_13_1.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468675/Redmi_13_2.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468683/Redmi_13_3.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742468691/Redmi_13_4.jpg"
+    ],
+    "isDeleted": false,
+    "rating": 3.9,
+    "ratingQuantity": 111
+  },
+  {
+    "title": "OnePlus 13",
+    "description": "OnePlus 13 (Arctic Dawn, 512 GB)  (16 GB RAM)",
+    "price": 66245,
+    "discountPercentage": 15.46,
+    "stockQuantity": 36,
+    "brand": "OnePlus",
+    "category": "65a7e24602e12c44f599442c",
+    "thumbnail": "https://res.cloudinary.com/dgujjndsn/image/upload/v1742898829/OnePlus_thumbnail.jpg",
+    "images": [
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742898829/OnePlus_thumbnail.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742898843/OnePlus_Image_1.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742898849/OnePlus_Image_2.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742898854/OnePlus_Image_3.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742898861/OnePlus_Image_4.jpg"
+    ],
+    "isDeleted": false,
+    "rating": 4.6,
+    "ratingQuantity": 345
+  },
+  {
+    "title": "Sony Bravia 2",
+    "description": "SONY Bravia 2 138.8 cm (55 inch) Ultra HD (4K) LED Smart Google TV with Feature for PlayStation 5  (K-55S25B)",
+    "price": 55454,
+    "discountPercentage": 15.46,
+    "stockQuantity": 36,
+    "brand": "Sony",
+    "category": "65a7e24602e12c44f599442c",
+    "thumbnail": "https://res.cloudinary.com/dgujjndsn/image/upload/v1742898866/Sony_Bravia_thumbnail.jpg",
+    "images": [
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742898866/Sony_Bravia_thumbnail.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742898872/Sony_Bravia_Image_1.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742898878/Sony_Bravia_Image_2.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742898883/Sony_Bravia_Image_3.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742898889/Sony_Bravia_Image_4.jpg"
+    ],
+    "isDeleted": false,
+    "rating": 4.9,
+    "ratingQuantity": 702
+  },
+  {
+    "title": "Canon EOS R50",
+    "description": "Canon EOS R50 Mirrorless Camera Body with RF - S 18 - 45 mm f/4.5 - 6.3 IS STM  (Black)",
+    "price": 60999,
+    "discountPercentage": 15.46,
+    "stockQuantity": 36,
+    "brand": "Canon",
+    "category": "65a7e24602e12c44f599442c",
+    "thumbnail": "https://res.cloudinary.com/dgujjndsn/image/upload/v1742898745/Canon_EOS_thumbnail.jpg",
+    "images": [
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742898745/Canon_EOS_thumbnail.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742898769/Canon_EOS_Image_1.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742898783/Canon_EOS_Image_2.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742898797/Canon_EOS_Image_3.jpg",
+      "https://res.cloudinary.com/dgujjndsn/image/upload/v1742898810/Canon_EOS_Image_4.jpg"
+    ],
+    "isDeleted": false,
+    "rating": 4.7,
+    "ratingQuantity": 567
+  }
+]
