@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 // Create an Axios instance
 const api = axios.create({
@@ -26,10 +27,22 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response, // If the response is fine, just return it
   (error) => {
-    if (error.response && error.response.status === 401) {
+    if (error.response && (error.response.status === 401 || error.response.status === 403)) {
       console.error("Unauthorized! Logging out...");
-      localStorage.removeItem("token"); // Remove token if expired/invalid
-      window.location.href = "/login"; // Redirect to login
+      localStorage.clear(); // Remove token if expired/invalid
+      toast.error("🎉 Unauthorized! Logging out...", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+      });
+      setTimeout(() => {
+        window.location.href = "/login"; 
+      }, 1000);
+      //navigate("/login"); // Redirect to login
     }
     return Promise.reject(error);
   }

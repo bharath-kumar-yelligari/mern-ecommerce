@@ -30,7 +30,9 @@ const Header = ({ onLogout }) => {
   };
 
   useEffect(() => {
-    dispatch(fetchCartProductsRequest()); // Fetch product details
+    if (localStorage.getItem("token") !== null) {
+      dispatch(fetchCartProductsRequest()); // Fetch product details
+    }
   }, [dispatch]);
 
   const handleSearch = (e) => {
