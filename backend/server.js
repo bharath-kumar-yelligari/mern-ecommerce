@@ -1,6 +1,6 @@
 // server.js
 const dotenv = require('dotenv');
-dotenv.config({ path: './config.env' });
+dotenv.config({ path: './config/config.env' });
 
 const AppError = require('./appError');
 const app = require('./app');

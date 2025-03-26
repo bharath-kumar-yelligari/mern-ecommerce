@@ -7,6 +7,7 @@ const cartRoutes = require('./routes/cart');
 const usersRoutes = require('./routes/users');
 const addressRoutes = require('./routes/address');
 
+//app init
 const app = express();
 
 // middlewares
