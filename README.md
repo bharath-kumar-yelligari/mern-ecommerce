@@ -9,6 +9,9 @@
 
 - **Product Management:**  
   - List products in dashboard, product details page
+
+- **Product filtering:**  
+  - User can filter products by brand and product name in the search bar
   
 - **Address Management:**
   - Manage email, mobile, and addresses of user, add/update/delete multiple addresses.
