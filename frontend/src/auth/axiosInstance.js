@@ -1,22 +1,19 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { store } from "../store"; // Import Redux store
+import { logoutRequest } from "../actions/authActions";
+
+axios.defaults.withCredentials = "include";
 
 // Create an Axios instance
 const api = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL, // Change this to your backend URL
-  headers: {
-    "Content-Type": "application/json",
-  },
 });
 
-// Request Interceptor: Attach token to every request
+// ✅ Request Interceptor (NO NEED to manually set Authorization)
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token"); // Get token from localStorage
-    if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
-    }
-    return config;
+    return config; // Cookies are sent automatically
   },
   (error) => {
     return Promise.reject(error);
@@ -40,8 +37,10 @@ api.interceptors.response.use(
         theme: "colored",
       });
       setTimeout(() => {
-        window.location.href = "/login"; 
+        store.dispatch(logoutRequest()); // Dispatch logout when unauthorized
+        window.location.href = "/login";
       }, 1000);
+
       //navigate("/login"); // Redirect to login
     }
     return Promise.reject(error);

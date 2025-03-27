@@ -1,11 +1,17 @@
 import { takeLatest, call, put } from "redux-saga/effects";
 import axios from "axios";
-import { loginSuccess, loginFailure, LOGIN_REQUEST } from "../actions/authActions";
+import { loginSuccess, loginFailure, LOGIN_REQUEST, logoutSuccess, logoutFailure, LOGOUT_REQUEST } from "../actions/authActions";
 import { fetchProductsRequest } from "../actions/productActions";
+import api from "../auth/axiosInstance";
 
 const loginUserAPI = async (action) => {
     const { email, password } = action.payload;
-    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/login` , { email, password }); 
+    const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/login`, { email, password });
+    return response.data;
+}
+
+const logoutUserAPI = async () => {
+    const response = await api.post(`/users/logout`);
     return response.data;
 }
 
@@ -14,7 +20,6 @@ function* loginUser(action) {
         const response = yield call(loginUserAPI, action);
         yield put(loginSuccess(response));
         localStorage.setItem("user", response.name);
-        localStorage.setItem("token", response.token);
         yield put(fetchProductsRequest()); // Fetch dashboard after login
         action.payload.navigate("/");
     } catch (error) {
@@ -22,6 +27,18 @@ function* loginUser(action) {
     }
 }
 
+function* logoutUser(action) {
+    try {
+        const response = yield call(logoutUserAPI);
+        yield put(logoutSuccess(response));
+        console.log("logoutsuccess")
+    } catch (error) {
+        yield put(logoutFailure(error.response?.data?.error || "Login failed"));
+    }
+}
+
+
 export function* watchAuth() {
     yield takeLatest(LOGIN_REQUEST, loginUser);
+    yield takeLatest(LOGOUT_REQUEST, logoutUser);
 }

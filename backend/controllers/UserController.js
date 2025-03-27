@@ -21,9 +21,27 @@ const loginUser = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ error: "Invalid credentials" });
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+    res.cookie("token", token, {
+        httpOnly: true,
+        secure: false,  // Cannot be true on HTTP
+        sameSite: "Lax", // Works for same-site requests
+        maxAge: 24 * 60 * 60 * 1000, // 1-day expiration
+    });
 
-    res.json({ message: "Login successful", token, name: user.name });
+    res.json({ message: "Login successful", name: user.name, isLoggedIn: true });
 }
 
-module.exports = { registerUser, loginUser };
+//To logout user
+const logoutUser = async (req, res) => {
+    console.log("logout user route")
+    res.clearCookie("token", {
+        httpOnly: true,
+        secure: false, // Set to `true` in production (HTTPS required)
+        sameSite: "lax",
+    });
+    res.status(200).json({ message: "Logged out successfully" });
+}
+
+
+module.exports = { registerUser, loginUser, logoutUser };

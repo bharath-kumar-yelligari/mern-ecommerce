@@ -1,5 +1,4 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import axios from "axios";
 import { fetchOrdersSuccess, fetchOrdersFailure, fetchAddOrderSuccess, fetchAddOrderFailure, FETCH_ADD_ORDER_REQUEST, FETCH_ORDERS_REQUEST } from "../actions/ordersActions";
 import { fetchClearCartRequest } from "../actions/cartActions";
 import api from "../auth/axiosInstance";

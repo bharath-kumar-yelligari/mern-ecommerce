@@ -1,5 +1,4 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import axios from "axios";
 import {
   fetchAddressSuccess, fetchAddressFailure, fetchAddAddressSuccess, fetchAddAddressFailure,
   fetchUpdateAddressSuccess, fetchUpdateAddressFailure, fetchDeleteAddressSuccess, fetchDeleteAddressFailure,

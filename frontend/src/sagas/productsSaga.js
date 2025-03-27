@@ -1,5 +1,4 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import axios from "axios";
 import { fetchProductsSuccess, fetchProductsFailure, fetchProductDetailsSuccess, fetchProductDetailsFailure, FETCH_PRODUCT_DETAILS_REQUEST, FETCH_PRODUCTS_REQUEST } from "../actions/productActions";
 import api from "../auth/axiosInstance";
 

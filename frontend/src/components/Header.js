@@ -5,17 +5,18 @@ import { fetchCartProductsRequest } from "../actions/cartActions";
 import { filterProducts } from "../actions/productActions";
 
 import { Link } from "react-router-dom";
-import { FaShoppingCart, FaUser, FaBars, FaTimes, FaSignOutAlt, FaShoppingBag, FaBox, FaAddressBook, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { FaShoppingCart, FaUser, FaBars, FaTimes, FaSignOutAlt, FaBox, FaAddressBook, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import "../styles/Header.scss";
-import { logout } from "../actions/authActions";
+import { logoutRequest } from "../actions/authActions";
 
-const Header = ({ onLogout }) => {
+const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const user = useSelector((state) => state.auth.user); // Get user from Redux
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // Get user from Redux
+
   const cartItems = useSelector((state) => state.cart.cart);
   const [search, setSearch] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
-
   const cartLength = typeof cartItems === "string" ? JSON.parse(cartItems).length : cartItems.length;
   const dropdownRef = useRef(null); // Reference for dropdown menu
 
@@ -23,17 +24,19 @@ const Header = ({ onLogout }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logout());
+    dispatch(logoutRequest());
     setShowDropdown(false); // Close dropdown after logout
     localStorage.clear();
     navigate("/login"); // Redirect to login
   };
 
   useEffect(() => {
-    if (localStorage.getItem("token") !== null) {
+    // console.log("isAuthenticated", isAuthenticated)
+    // console.log("loading", loading)
+    if (isLoggedIn) {
       dispatch(fetchCartProductsRequest()); // Fetch product details
     }
-  }, [dispatch]);
+  }, [dispatch, isLoggedIn]);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
