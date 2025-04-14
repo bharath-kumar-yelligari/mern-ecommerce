@@ -39,13 +39,13 @@
 ### Clone the project
 
 ```bash
-  git clone https://github.com/bharathyelligari/assessment-final.git
+  git clone https://github.com/bharath-kumar-yelligari/mern-ecommerce.git
 ```
 
 ### Navigate to the project directory
 
 ```bash
-  cd assessment-final
+  cd mern-ecommerce
 ```
 
 ### Install dependencies for frontend and backend separately
