@@ -31,7 +31,6 @@ function* logoutUser(action) {
     try {
         const response = yield call(logoutUserAPI);
         yield put(logoutSuccess(response));
-        console.log("logoutsuccess")
     } catch (error) {
         yield put(logoutFailure(error.response?.data?.error || "Login failed"));
     }

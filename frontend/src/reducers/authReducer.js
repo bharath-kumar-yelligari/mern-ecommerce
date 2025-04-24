@@ -1,3 +1,12 @@
+import {
+  LOGIN_FAILURE,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE
+} from "../actions/authActions";
+
 const initialState = {
   user: localStorage.getItem("user") || null,
   token: null,
@@ -8,20 +17,18 @@ const initialState = {
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "LOGIN_REQUEST":
+    case LOGIN_REQUEST:
       return { ...state, loading: true, error: null };
-    case "LOGIN_SUCCESS":
+    case LOGIN_SUCCESS:
       return { ...state, loading: false, user: action.payload.name, isLoggedIn: action.payload.isLoggedIn };
-    case "LOGIN_FAILURE":
+    case LOGIN_FAILURE:
       return { ...state, loading: false, error: action.payload };
-    case "LOGOUT_REQUEST":
+    case LOGOUT_REQUEST:
       return { ...state, loading: true, error: null };
-    case "LOGOUT_SUCCESS":
+    case LOGOUT_SUCCESS:
       return { ...state, loading: false, user: null, cart: null, token: null, isLoggedIn: false };
-    case "LOGOUT_FAILURE":
+    case LOGOUT_FAILURE:
       return { ...state, loading: false, error: action.payload };
-    // case "LOGOUT":
-    //   return { ...state, loading: false , user: null,cart:null, token:null };
     default:
       return state;
   }
