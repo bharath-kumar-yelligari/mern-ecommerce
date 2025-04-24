@@ -1,6 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
-import { store } from "../store"; // Import Redux store
+import store from "../store"; // Import Redux store
 import { logoutRequest } from "../actions/authActions";
 
 axios.defaults.withCredentials = "include";

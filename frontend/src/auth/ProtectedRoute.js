@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import useAuth from "./useAuth";
-import { store } from "../store";
+import store from "../store";
 import { logoutRequest } from "../actions/authActions";
 
 const ProtectedRoute = ({ children }) => {

@@ -21,7 +21,7 @@ function* loginUser(action) {
         yield put(loginSuccess(response));
         localStorage.setItem("user", response.name);
         yield put(fetchProductsRequest()); // Fetch dashboard after login
-        action.payload.navigate("/");
+        action.meta.navigate("/");
     } catch (error) {
         yield put(loginFailure(error.response?.data?.error || "Login failed"));
     }

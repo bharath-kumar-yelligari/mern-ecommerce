@@ -8,7 +8,8 @@ export const LOGOUT_FAILURE = "LOGOUT_FAILURE"
 
 export const loginRequest = (email, password, navigate) => ({
     type: LOGIN_REQUEST,
-    payload: { email, password, navigate }
+    payload: { email, password},
+    meta: { navigate } // non-serializable, but safer
 });
 
 export const loginSuccess = (token) => ({
